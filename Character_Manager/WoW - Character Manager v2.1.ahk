@@ -1,14 +1,24 @@
-﻿#Requires AutoHotkey v2.0
+#Requires AutoHotkey v2.0
+Persistent
+#SingleInstance Force
+SetWorkingDir A_ScriptDir
+;	DetectHiddenWindows, On
+;	SetTitleMatchMode, 2
+;	SetBatchLines -1
+;	SendMode Input
+;	#NoTrayIcon
+;	#Warn All, OutputDebug
+
 _staticdata := ".\ini\staticdata.ini"
 
 ; --- Load static sections up front ---
-factionData    := LoadIniSection(_staticdata, "factions")
-profData       := LoadIniSection(_staticdata, "professions")
+factionData	:= LoadIniSection(_staticdata, "factions")
+profData	   := LoadIniSection(_staticdata, "professions")
 primaryProfs   := profData["profession"]
-secProfData    := LoadIniSection(_staticdata, "secondary professions")
+secProfData	:= LoadIniSection(_staticdata, "secondary professions")
 secondaryProfs := secProfData["secondary profession"]
 
-;	==================================== allows a GUI without a "caption" to be draggable
+;	==================================== allows a GUI to be 'draggable' without a "caption" [title bar]
 OnMessage 0x200, WM_MOUSEMOVE
 WM_MOUSEMOVE(wParam, lParam, msg, hwnd) {
 	If wParam = 1	; LButton
@@ -145,74 +155,74 @@ ddlProf4.OnEvent("Change", (*) => RefreshSecondaryProfs())
 ddlProf5.OnEvent("Change", (*) => RefreshSecondaryProfs())
 
 FactionChanged(ctrl, *) {
-    faction := StrLower(ctrl.Text)
-    ResetDDL(ddlRace)
-    ResetDDL(ddlClass)
-    ResetDDL(ddlSpec)
-    txtArmor.Value := ""
-    if faction = ""
-        return
-    races := LoadIniKey(_staticdata, "races", faction)
-    ddlRace.Delete()
-    ddlRace.Add(PrependBlank(races))
-    ddlRace.Value := 1
+	faction := StrLower(ctrl.Text)
+	ResetDDL(ddlRace)
+	ResetDDL(ddlClass)
+	ResetDDL(ddlSpec)
+	txtArmor.Value := ""
+	If faction = ""
+		return
+	races := LoadIniKey(_staticdata, "races", faction)
+	ddlRace.Delete()
+	ddlRace.Add(PrependBlank(races))
+	ddlRace.Value := 1
 }
 
 RaceChanged(ctrl, *) {
-    race := ctrl.Text
-    ResetDDL(ddlClass)
-    ResetDDL(ddlSpec)
-    txtArmor.Value := ""
-    if race = ""
-        return
-    classes := LoadIniKey(_staticdata, "racial classes", race)
-    ddlClass.Delete()
-    ddlClass.Add(PrependBlank(classes))
-    ddlClass.Value := 1
+	race := ctrl.Text
+	ResetDDL(ddlClass)
+	ResetDDL(ddlSpec)
+	txtArmor.Value := ""
+	If race = ""
+		return
+	classes := LoadIniKey(_staticdata, "racial classes", race)
+	ddlClass.Delete()
+	ddlClass.Add(PrependBlank(classes))
+	ddlClass.Value := 1
 }
 
 ClassChanged(ctrl, *) {
-    class := ctrl.Text
-    ResetDDL(ddlSpec)
-    txtArmor.Value := ""
-    if class = ""
-        return
-    specs  := LoadIniKey(_staticdata, "class specializations", class)
-    armor  := LoadIniKey(_staticdata, "armor types", class)
-    ddlSpec.Delete()
-    ddlSpec.Add(PrependBlank(specs))
-    ddlSpec.Value := 1
-    txtArmor.Value := (armor.Length > 0) ? armor[1] : ""
+	class := ctrl.Text
+	ResetDDL(ddlSpec)
+	txtArmor.Value := ""
+	If class = ""
+		return
+	specs  := LoadIniKey(_staticdata, "class specializations", class)
+	armor  := LoadIniKey(_staticdata, "armor types", class)
+	ddlSpec.Delete()
+	ddlSpec.Add(PrependBlank(specs))
+	ddlSpec.Value := 1
+	txtArmor.Value := (armor.Length > 0) ? armor[1] : ""
 }
 
 RefreshPrimaryProfs() {
-    chosen := [ddlProf1.Text, ddlProf2.Text]
-    for ddl in [ddlProf1, ddlProf2] {
-        cur := ddl.Text
-        available := [""]
-        for p in primaryProfs {
-            if p = cur || !HasVal(chosen, p) || p = ""
-                available.Push(p)
-        }
-        ddl.Delete()
-        ddl.Add(available)
-        ddl.Value := HasVal(available, cur) ? IndexOf(available, cur) : 1
-    }
+	chosen := [ddlProf1.Text, ddlProf2.Text]
+	for ddl in [ddlProf1, ddlProf2] {
+		cur := ddl.Text
+		available := [""]
+		for p in primaryProfs {
+			If p = cur || !HasVal(chosen, p) || p = ""
+				available.Push(p)
+		}
+		ddl.Delete()
+		ddl.Add(available)
+		ddl.Value := HasVal(available, cur) ? IndexOf(available, cur) : 1
+	}
 }
 
 RefreshSecondaryProfs() {
-    chosen := [ddlProf3.Text, ddlProf4.Text, ddlProf5.Text]
-    for ddl in [ddlProf3, ddlProf4, ddlProf5] {
-        cur := ddl.Text
-        available := [""]
-        for p in secondaryProfs {
-            if p = cur || !HasVal(chosen, p) || p = ""
-                available.Push(p)
-        }
-        ddl.Delete()
-        ddl.Add(available)
-        ddl.Value := HasVal(available, cur) ? IndexOf(available, cur) : 1
-    }
+	chosen := [ddlProf3.Text, ddlProf4.Text, ddlProf5.Text]
+	for ddl in [ddlProf3, ddlProf4, ddlProf5] {
+		cur := ddl.Text
+		available := [""]
+		for p in secondaryProfs {
+			If p = cur || !HasVal(chosen, p) || p = ""
+				available.Push(p)
+		}
+		ddl.Delete()
+		ddl.Add(available)
+		ddl.Value := HasVal(available, cur) ? IndexOf(available, cur) : 1
+	}
 }
 
 F9::RELOAD
@@ -221,59 +231,59 @@ F9::RELOAD
 ; --- Helper Functions ---
 
 LoadIniSection(file, section) {
-    result := Map()
-    raw := IniRead(file, section)
-    for line in StrSplit(raw, "`n") {
-        parts := StrSplit(line, "=", , 2)
-        if parts.Length = 2 && parts[1] != "limit"
-            result[parts[1]] := StrSplit(parts[2], "|")
-    }
-    return result
+	result := Map()
+	raw := IniRead(file, section)
+	for line in StrSplit(raw, "`n") {
+		parts := StrSplit(line, "=", , 2)
+		If parts.Length = 2 && parts[1] != "limit"
+			result[parts[1]] := StrSplit(parts[2], "|")
+	}
+	return result
 }
 
 LoadIniKey(file, section, key) {
-    try {
-        raw := IniRead(file, section, key)
-        return StrSplit(raw, "|")
-    } catch {
-        return []
-    }
+	try {
+		raw := IniRead(file, section, key)
+		return StrSplit(raw, "|")
+	} catch {
+		return []
+	}
 }
 
 AddLabel(gui, label) {
-    gui.Add("Text", "x10 w160", StrTitle(label))
+	gui.Add("Text", "x10 w160", StrTitle(label))
 }
 
 ResetDDL(ctrl) {
-    ctrl.Delete()
-    ctrl.Add([""])
-    ctrl.Value := 1
+	ctrl.Delete()
+	ctrl.Add([""])
+	ctrl.Value := 1
 }
 
 HasVal(arr, val) {
-    for v in arr
-        if v = val
-            return true
-    return false
+	for v in arr
+		If v = val
+			return true
+	return false
 }
 
 IndexOf(arr, val) {
-    for i, v in arr
-        if v = val
-            return i
-    return 1
+	for i, v in arr
+		If v = val
+			return i
+	return 1
 }
 
 PrependBlank(arr) {
-    result := [""]
-    for v in arr
-        result.Push(v)
-    return result
+	result := [""]
+	for v in arr
+		result.Push(v)
+	return result
 }
 
 StrTitle(str) {
-    result := ""
-    for word in StrSplit(str, " ")
-        result .= (result ? " " : "") . StrUpper(SubStr(word,1,1)) . StrLower(SubStr(word,2))
-    return result
+	result := ""
+	for word in StrSplit(str, " ")
+		result .= (result ? " " : "") . StrUpper(SubStr(word,1,1)) . StrLower(SubStr(word,2))
+	return result
 }
