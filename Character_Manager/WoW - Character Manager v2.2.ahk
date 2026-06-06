@@ -35,7 +35,8 @@ MF_DISABLED := 2
 ; --- Build GUI ---
 myGui := Gui()
 myGui.Title := "Character Creator"
-myGui.Opt("+AlwaysOnTop -Caption -Resize +Border +ToolWindow ")
+myGui.Opt("+AlwaysOnTop +Border +ToolWindow -Caption -Resize")
+; myGui.Opt("+AlwaysOnTop -Caption +Resize +Border +ToolWindow")
 myGui.SetFont("s14")
 myGui.OnEvent("Close", (*) => ExitApp())
 ; hMenu := DllCall("GetSystemMenu", "Ptr", MyGui.Hwnd, "Int", 0, "Ptr")
@@ -46,12 +47,14 @@ _WoWlogo := ".\img\logo.png"
 _WoWLOGOxy := MyGui.Add("Picture", "h100", _WoWlogo)
 ;	Sets the font typeface, size, style, and/or color for controls added to the window from this point onward.
 ;	MyGui.SetFont(Options, FontName)
-_guiTITLE := MyGui.Add("Text", "cBLACK y+5", "CHARACTER MANAGER")
+_guiTITLE := MyGui.Add("Text", "cBLACK y+5", "CHARACTER MANAGER")	; why does this require "+5" to position this element closer to the logo?
 _guiTITLE.SetFont("BOLD s13", "Arial Rounded MT Bold")
 
-_PurpleUnderline1 := "G:\WoW Character Database\testing\img\purple underline 100x2a.png"
-_PurpleUnderlineXY := MyGui.Add("Picture", "x0", _PurpleUnderline1)
+_PurpleUnderline := ".\img\purple underline 100x2a.png"
+_PurpleUnderlineXY := MyGui.Add("Picture", "x0", _PurpleUnderline)
 _PurpleUnderlineXY.GetPos(&underlineX, &underlineY, &underlineWIDTH, &underlineHEIGHT)
+
+; MyTab := MyGui.Add("Tab3", "x10 y150 w500 h500 Choose1", ["Viewer", "Editor", "Profile"])
 
 ; G - Faction
 AddLabel(myGui, "Faction")
@@ -99,40 +102,35 @@ AddLabel(myGui, "Profession 5")
 ddlProf5 := myGui.Add("DropDownList", "x175 yp-5 w200", PrependBlank(secondaryProfs))
 ddlProf5.Value := 1
 
-; --- Center LOGO ---
-MyGui.Show("Hide")
+; --- Get 'MyGui' X, Y, Width, Height ---
+MyGui.Show("w420 h600 Hide")
 MyGui.GetPos(&guiX, &guiY, &guiWidth, &guiHeight)
 
-CenterLOGO(guiX, guiY, guiWidth, guiHeight)
-CenterLOGO(x, y, w, h)
+; --- Center LOGO ---
+CenterLOGO(guiWidth)
+CenterLOGO(width)
 	{
-		_WoWLOGOxy.GetPos(&logoX, &logoY, &logoWidth, &logoHeight)
-		_WoWLOGOxy.Move((ROUND(w / 2) - ROUND(logoWidth / 2)), , , )
+		_WoWLOGOxy.GetPos( , , &logoWidth, )
+		_WoWLOGOxy.Move( ( Round( width / 2 ) - Round( logoWidth / 2 ) ), , , )
 	}
 
+; --- Center TITLE ---
 CenterGuiTITLE(guiWidth, _guiTITLE.Text)
 CenterGuiTITLE(_width, _text)
 	{
 		_Length := StrLen(_text)
-		_guiTITLE.Move((Round(_width / 2) / 2 - Round(_Length / 2)), , , )
+		_guiTITLE.Move( ( Round( _width / 2 ) / 2 - Round( _Length / 2 ) ), , , )
+	}
 
-StretchPurpleUnderline(guiX, guiWidth)
-StretchPurpleUnderline(x, width)
+; --- Center UNDERLINE ---
+StretchPurpleUnderline(guiWidth)
+StretchPurpleUnderline(width)
 	{
 		Global _guiTITLE
 		_guiTITLE.GetPos(&titleX, &titleY, &titleWidth, &titleHeight)
-		_PurpleUnderlineXY.Move( 1, titleY+25, guiWidth)
+		_PurpleUnderlineXY.Move( 0, titleY+25, width)	; "+25" to position 'below' the above 'GuiTITLE' element
 	}
 
-
-/*	====================================
-	_AI_ WiP 2026-05-30b [caption toggle working].ahk
-		GUI Width: 412
-		Text: Character Manager
-		Text Length: 17
-	====================================
-*/
-	}
 
 myGui.Show()
 
