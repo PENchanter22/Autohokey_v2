@@ -133,6 +133,7 @@ ShowMsg(text, title := "", flags := 262208) {
     WinWaitClose(D)
     return result["Value"]
 }
+
 ; Returns an AHK array of the current items in a DropDownList control.
 ; Used by RebuildPrimDD / RebuildSecDD to locate a value after a rebuild.
 GetDDLItems(ctrl) {
