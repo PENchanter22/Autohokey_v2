@@ -133,10 +133,10 @@ ShowMsg(text, title := "", flags := 262208) {
     WinWaitClose(D)
     return result["Value"]
 }
+; Returns an AHK array of the current items in a DropDownList control.
+; Used by RebuildPrimDD / RebuildSecDD to locate a value after a rebuild.
 GetDDLItems(ctrl) {
     items := []
-    loop ctrl.Value {          ; .Value after Delete+Add = count of items? No —
-    }                          ; safer: use SendMessage to get the count
     ; CB_GETCOUNT = 0x146, CB_GETLBTEXTLEN = 0x149, CB_GETLBTEXT = 0x148
     count := SendMessage(0x146, 0, 0, ctrl)
     loop count {
