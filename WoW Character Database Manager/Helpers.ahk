@@ -133,3 +133,17 @@ ShowMsg(text, title := "", flags := 262208) {
     WinWaitClose(D)
     return result["Value"]
 }
+GetDDLItems(ctrl) {
+    items := []
+    loop ctrl.Value {          ; .Value after Delete+Add = count of items? No —
+    }                          ; safer: use SendMessage to get the count
+    ; CB_GETCOUNT = 0x146, CB_GETLBTEXTLEN = 0x149, CB_GETLBTEXT = 0x148
+    count := SendMessage(0x146, 0, 0, ctrl)
+    loop count {
+        len := SendMessage(0x149, A_Index - 1, 0, ctrl)
+        buf := Buffer(len + 2, 0)
+        SendMessage(0x148, A_Index - 1, buf, ctrl)
+        items.Push(StrGet(buf, "UTF-16"))
+    }
+    return items
+}
