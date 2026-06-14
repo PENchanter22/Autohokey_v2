@@ -402,56 +402,6 @@ ShowEntryDialog(title, ch := "") {
     UpdateSpecs()
     DDSpec.Value := Max(1, FindInArr(GetSpecList(DDClass.Text), ch.Get("spec", "")))
 
-    RebuildPrimDD(target, other) {
-        ; target = DDL to rebuild, other = DDL whose value to exclude
-        cur     := target.Text                  ; remember current selection
-        exclude := other.Text
-        target.Delete()
-        loop prim.Length {
-            v := prim[A_Index]
-            if (exclude != "(none)" && v == exclude)
-                continue
-            target.Add([v])
-        }
-        ; restore previous selection if still present, else "(none)"
-        idx := FindInArr(GetDDLItems(target), cur)
-        target.Value := (idx > 0) ? idx : 1
-    }
-
-    RebuildSecDD(target, other1, other2) {
-        ; target = DDL to rebuild, other1/other2 = DDLs whose values to exclude
-        cur  := target.Text
-        ex1  := other1.Text
-        ex2  := other2.Text
-        target.Delete()
-        loop sec.Length {
-            v := sec[A_Index]
-            if (ex1 != "(none)" && v == ex1)
-                continue
-            if (ex2 != "(none)" && v == ex2)
-                continue
-            target.Add([v])
-        }
-        idx := FindInArr(GetDDLItems(target), cur)
-        target.Value := (idx > 0) ? idx : 1
-    }
-
-    UpdateProfDDs(changedCtrl, *) {
-        if (changedCtrl == DDProf1)
-            RebuildPrimDD(DDProf2, DDProf1)
-        else
-            RebuildPrimDD(DDProf1, DDProf2)
-    }
-
-    UpdateSecDDs(changedCtrl, *) {
-        if (changedCtrl == DDSec1)
-            RebuildSecDD(DDSec2, DDSec1, DDSec3),  RebuildSecDD(DDSec3, DDSec1, DDSec2)
-        else if (changedCtrl == DDSec2)
-            RebuildSecDD(DDSec1, DDSec2, DDSec3),  RebuildSecDD(DDSec3, DDSec1, DDSec2)
-        else
-            RebuildSecDD(DDSec1, DDSec2, DDSec3),  RebuildSecDD(DDSec2, DDSec1, DDSec3)
-    }
-
 ; ── PASTE THESE FOUR FUNCTIONS inside ShowEntryDialog(),
 ;    after UpdateSpecs() and before ConfirmDlg() ────────────
 
@@ -505,18 +455,7 @@ ShowEntryDialog(title, ch := "") {
             RebuildSecDD(DDSec1, DDSec2, DDSec3),  RebuildSecDD(DDSec2, DDSec1, DDSec3)
     }
 
-; ── REPLACE the existing OnEvent block (the three lines before D.Show)
-;    with this expanded version ──────────────────────────────
-
-    DDFac  .OnEvent("Change", UpdateRaces)
-    DDClass.OnEvent("Change", UpdateSpecs)
-    DDProf1.OnEvent("Change", UpdateProfDDs)
-    DDProf2.OnEvent("Change", UpdateProfDDs)
-    DDSec1 .OnEvent("Change", UpdateSecDDs)
-    DDSec2 .OnEvent("Change", UpdateSecDDs)
-    DDSec3 .OnEvent("Change", UpdateSecDDs)
-
-ConfirmDlg(*) {
+    ConfirmDlg(*) {
         n := Trim(EName.Value)
         if n == "" {
 			ShowMsg("Character name cannot be empty!", "Validation")
@@ -542,6 +481,9 @@ ConfirmDlg(*) {
         result["notes"]    := Trim(ENotes.Value)
         D.Destroy()
     }
+
+; ── REPLACE the existing OnEvent block (the three lines before D.Show)
+;    with this expanded version ──────────────────────────────
 
     DDFac  .OnEvent("Change", UpdateRaces)
     DDClass.OnEvent("Change", UpdateSpecs)
