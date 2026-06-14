@@ -138,7 +138,6 @@ ShowMsg(text, title := "", flags := 262208) {
 ; Used by RebuildPrimDD / RebuildSecDD to locate a value after a rebuild.
 GetDDLItems(ctrl) {
     items := []
-    ; CB_GETCOUNT = 0x146, CB_GETLBTEXTLEN = 0x149, CB_GETLBTEXT = 0x148
     count := SendMessage(0x146, 0, 0, ctrl)
     loop count {
         len := SendMessage(0x149, A_Index - 1, 0, ctrl)
