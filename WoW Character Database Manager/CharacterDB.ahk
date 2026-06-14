@@ -394,20 +394,8 @@ ShowEntryDialog(title, ch := "") {
         EArmor.Value := armor
     }
 
-    DDFac  .OnEvent("Change", UpdateRaces)
-    DDClass.OnEvent("Change", UpdateSpecs)
-
-    UpdateRaces()
-    DDRace.Value := Max(1, FindInArr(GetRaceList(DDFac.Text), ch.Get("race", "Human")))
-    UpdateSpecs()
-    DDSpec.Value := Max(1, FindInArr(GetSpecList(DDClass.Text), ch.Get("spec", "")))
-
-; ── PASTE THESE FOUR FUNCTIONS inside ShowEntryDialog(),
-;    after UpdateSpecs() and before ConfirmDlg() ────────────
-
-    RebuildPrimDD(target, other) {
-        ; target = DDL to rebuild, other = DDL whose value to exclude
-        cur     := target.Text                  ; remember current selection
+RebuildPrimDD(target, other) {
+        cur     := target.Text
         exclude := other.Text
         target.Delete()
         loop prim.Length {
@@ -416,16 +404,14 @@ ShowEntryDialog(title, ch := "") {
                 continue
             target.Add([v])
         }
-        ; restore previous selection if still present, else "(none)"
         idx := FindInArr(GetDDLItems(target), cur)
         target.Value := (idx > 0) ? idx : 1
     }
 
     RebuildSecDD(target, other1, other2) {
-        ; target = DDL to rebuild, other1/other2 = DDLs whose values to exclude
-        cur  := target.Text
-        ex1  := other1.Text
-        ex2  := other2.Text
+        cur := target.Text
+        ex1 := other1.Text
+        ex2 := other2.Text
         target.Delete()
         loop sec.Length {
             v := sec[A_Index]
@@ -447,13 +433,30 @@ ShowEntryDialog(title, ch := "") {
     }
 
     UpdateSecDDs(changedCtrl, *) {
-        if (changedCtrl == DDSec1)
-            RebuildSecDD(DDSec2, DDSec1, DDSec3),  RebuildSecDD(DDSec3, DDSec1, DDSec2)
-        else if (changedCtrl == DDSec2)
-            RebuildSecDD(DDSec1, DDSec2, DDSec3),  RebuildSecDD(DDSec3, DDSec1, DDSec2)
-        else
-            RebuildSecDD(DDSec1, DDSec2, DDSec3),  RebuildSecDD(DDSec2, DDSec1, DDSec3)
+        if (changedCtrl == DDSec1) {
+            RebuildSecDD(DDSec2, DDSec1, DDSec3)
+            RebuildSecDD(DDSec3, DDSec1, DDSec2)
+        } else if (changedCtrl == DDSec2) {
+            RebuildSecDD(DDSec1, DDSec2, DDSec3)
+            RebuildSecDD(DDSec3, DDSec1, DDSec2)
+        } else {
+            RebuildSecDD(DDSec1, DDSec2, DDSec3)
+            RebuildSecDD(DDSec2, DDSec1, DDSec3)
+        }
     }
+
+    DDFac  .OnEvent("Change", UpdateRaces)
+    DDClass.OnEvent("Change", UpdateSpecs)
+    DDProf1.OnEvent("Change", UpdateProfDDs)
+    DDProf2.OnEvent("Change", UpdateProfDDs)
+    DDSec1 .OnEvent("Change", UpdateSecDDs)
+    DDSec2 .OnEvent("Change", UpdateSecDDs)
+    DDSec3 .OnEvent("Change", UpdateSecDDs)
+
+    UpdateRaces()
+    DDRace.Value := Max(1, FindInArr(GetRaceList(DDFac.Text), ch.Get("race", "Human")))
+    UpdateSpecs()
+    DDSpec.Value := Max(1, FindInArr(GetSpecList(DDClass.Text), ch.Get("spec", "")))
 
     ConfirmDlg(*) {
         n := Trim(EName.Value)
