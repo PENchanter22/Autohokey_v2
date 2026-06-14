@@ -1,0 +1,22 @@
+﻿[
+  {
+    "profile": "Default",
+    "name": "dummy",
+    "level": "1",
+    "realm": "dummy",
+    "guild": "dummy",
+    "faction": "Horde",
+    "race": "Tauren",
+    "gender": "Male",
+    "class": "Druid",
+    "spec": "Balance",
+    "armor": "Leather",
+    "prof1": "Leatherworking",
+    "prof2": "Skinning",
+    "sec1": "Cooking",
+    "sec2": "Fishing",
+    "sec3": "Archaeology",
+    "status": "Main",
+    "notes": "dummy"
+  }
+]
