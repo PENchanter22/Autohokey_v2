@@ -1,4 +1,4 @@
-﻿; ============================================================
+; ============================================================
 ;  CharacterDB.ahk — Character CRUD, list, sort, entry dialog
 ;  Include this file from the master script.
 ; ============================================================
@@ -394,18 +394,23 @@ ShowEntryDialog(title, ch := "") {
         EArmor.Value := armor
     }
 
-RebuildPrimDD(target, other) {
+    RebuildPrimDD(target, other) {
+        Log("RebuildPrimDD called — cur: " target.Text " exclude: " other.Text)
         cur     := target.Text
         exclude := other.Text
         target.Delete()
+        newIdx  := 1
+        i       := 0
         loop prim.Length {
             v := prim[A_Index]
             if (exclude != "(none)" && v == exclude)
                 continue
+            i++
             target.Add([v])
+            if (v == cur)
+                newIdx := i
         }
-        idx := FindInArr(GetDDLItems(target), cur)
-        target.Value := (idx > 0) ? idx : 1
+        target.Value := newIdx
     }
 
     RebuildSecDD(target, other1, other2) {
@@ -413,16 +418,20 @@ RebuildPrimDD(target, other) {
         ex1 := other1.Text
         ex2 := other2.Text
         target.Delete()
+        newIdx := 1
+        i      := 0
         loop sec.Length {
             v := sec[A_Index]
             if (ex1 != "(none)" && v == ex1)
                 continue
             if (ex2 != "(none)" && v == ex2)
                 continue
+            i++
             target.Add([v])
+            if (v == cur)
+                newIdx := i
         }
-        idx := FindInArr(GetDDLItems(target), cur)
-        target.Value := (idx > 0) ? idx : 1
+        target.Value := newIdx
     }
 
     UpdateProfDDs(changedCtrl, *) {
@@ -452,6 +461,8 @@ RebuildPrimDD(target, other) {
     DDSec1 .OnEvent("Change", UpdateSecDDs)
     DDSec2 .OnEvent("Change", UpdateSecDDs)
     DDSec3 .OnEvent("Change", UpdateSecDDs)
+    BtnOK  .OnEvent("Click", ConfirmDlg)
+    BtnCan .OnEvent("Click", (*) => D.Destroy())
 
     UpdateRaces()
     DDRace.Value := Max(1, FindInArr(GetRaceList(DDFac.Text), ch.Get("race", "Human")))
@@ -461,7 +472,7 @@ RebuildPrimDD(target, other) {
     ConfirmDlg(*) {
         n := Trim(EName.Value)
         if n == "" {
-			ShowMsg("Character name cannot be empty!", "Validation")
+            ShowMsg("Character name cannot be empty!", "Validation")
             return
         }
         result["profile"]  := ActivePro
