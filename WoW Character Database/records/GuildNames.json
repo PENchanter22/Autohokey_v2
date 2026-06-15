@@ -1,0 +1,40 @@
+﻿{
+  "active_profile": "PEN",
+  "guilds": [
+    {
+      "created": "2026-06-13",
+      "name": "Deyhide",
+      "leader": "Talyka"
+      "faction": "Horde"
+      "notes": "bank: 0g"
+    },
+    {
+      "created": "2026-06-13",
+      "name": "Friends of Elphaba",
+      "leader": "EarcenCovene"
+      "faction": "Alliance"
+      "notes": "bank: 1,000g"
+    },
+    {
+      "created": "2026-06-13",
+      "name": "Instant Mashed Opponents",
+      "leader": "Garaharm"
+      "faction": "Horde"
+      "notes": "bank: 1,000g, 75s, 38c"
+    },
+    {
+      "created": "2026-06-13",
+      "name": "Random Acts of Rodenticide",
+      "leader": "Zoerunah"
+      "faction": "Horde"
+      "notes": "bank: 1,000g"
+    },
+    {
+      "created": "2026-06-13",
+      "name": "Running With Scissors",
+      "leader": "Sumula"
+      "faction": "Horde"
+      "notes": "bank: 1,000g"
+    }
+  ]
+}
