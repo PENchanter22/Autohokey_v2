@@ -1,0 +1,299 @@
+﻿[2026-06-14 15:25:40] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:25:40] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:25:40] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:25:40] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:25:40] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:25:40] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:25:40] [INFO] SortChars complete on key: name
+[2026-06-14 15:25:40] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:25:40] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:26:15] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 15:28:38] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:28:38] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:28:38] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:28:38] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:28:38] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:28:38] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:28:38] [INFO] SortChars complete on key: name
+[2026-06-14 15:28:38] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:28:38] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:28:41] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 15:29:13] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:29:13] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:29:13] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:29:13] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:29:13] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:29:13] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:29:13] [INFO] SortChars complete on key: name
+[2026-06-14 15:29:13] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:29:13] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:29:16] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 15:29:21] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:29:21] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:29:21] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:29:21] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:29:21] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:29:21] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:29:21] [INFO] SortChars complete on key: name
+[2026-06-14 15:29:21] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:29:21] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:29:22] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 15:34:39] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:34:39] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:34:39] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:34:39] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:34:39] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:34:39] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:34:39] [INFO] SortChars complete on key: name
+[2026-06-14 15:34:39] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:34:39] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:34:54] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 15:35:47] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:35:47] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:35:47] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:35:47] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:35:47] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:35:47] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:35:47] [INFO] SortChars complete on key: name
+[2026-06-14 15:35:47] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:35:47] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:35:55] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 15:36:20] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:36:20] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:36:20] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:36:20] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:36:20] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:36:20] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:36:20] [INFO] SortChars complete on key: name
+[2026-06-14 15:36:20] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:36:20] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:36:26] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 15:36:31] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 15:36:31] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 15:36:31] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 15:36:31] [INFO] File loaded — total records in file: 3
+[2026-06-14 15:36:31] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 15:36:31] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 15:36:31] [INFO] SortChars complete on key: name
+[2026-06-14 15:36:31] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 15:36:31] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 15:37:12] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 18:49:01] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 18:49:01] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 18:49:01] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 18:49:01] [INFO] File loaded — total records in file: 3
+[2026-06-14 18:49:01] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 18:49:01] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 18:49:01] [INFO] SortChars complete on key: name
+[2026-06-14 18:49:01] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 18:49:01] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 18:49:19] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 20:26:15] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 20:26:15] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 20:26:15] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 20:26:15] [INFO] File loaded — total records in file: 3
+[2026-06-14 20:26:15] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 20:26:15] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 20:26:15] [INFO] SortChars complete on key: name
+[2026-06-14 20:26:15] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 20:26:15] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 20:26:23] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 20:27:06] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 20:27:06] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 20:27:06] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 20:27:06] [INFO] File loaded — total records in file: 3
+[2026-06-14 20:27:06] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 20:27:06] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 20:27:06] [INFO] SortChars complete on key: name
+[2026-06-14 20:27:06] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 20:27:06] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 20:27:16] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 20:27:40] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 20:27:40] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 20:27:40] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 20:27:40] [INFO] File loaded — total records in file: 3
+[2026-06-14 20:27:40] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 20:27:40] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 20:27:40] [INFO] SortChars complete on key: name
+[2026-06-14 20:27:40] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 20:27:40] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 20:27:50] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 20:28:08] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 20:28:08] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 20:28:08] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 20:28:08] [INFO] File loaded — total records in file: 3
+[2026-06-14 20:28:08] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 20:28:08] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 20:28:08] [INFO] SortChars complete on key: name
+[2026-06-14 20:28:08] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 20:28:08] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 20:28:13] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 23:37:11] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 23:37:11] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 23:37:11] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 23:37:11] [INFO] File loaded — total records in file: 3
+[2026-06-14 23:37:11] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 23:37:11] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 23:37:11] [INFO] SortChars complete on key: name
+[2026-06-14 23:37:11] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 23:37:11] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 23:37:45] [LINE] ─────────────────────────────────────────────────────
+[2026-06-14 23:44:39] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-14 23:44:39] [INFO] SaveCharDB — writing to: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json for profile: PEN
+[2026-06-14 23:44:39] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\WoW Character Database Manager\records\PEN.json
+[2026-06-14 23:44:39] [INFO] File loaded — total records in file: 3
+[2026-06-14 23:44:39] [INFO] Records matching profile 'PEN': 3
+[2026-06-14 23:44:39] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-14 23:44:39] [INFO] SortChars complete on key: name
+[2026-06-14 23:44:39] [INFO] SortChars complete — about to call RefreshList
+[2026-06-14 23:44:39] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 23:50:04] [INFO] RefreshList called — g_chars.Length: 3 filter: 'a'
+[2026-06-14 23:50:04] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afa'
+[2026-06-14 23:50:04] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afas'
+[2026-06-14 23:50:04] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasf'
+[2026-06-14 23:50:04] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfa'
+[2026-06-14 23:50:05] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfas'
+[2026-06-14 23:50:05] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasf'
+[2026-06-14 23:50:05] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasfs'
+[2026-06-14 23:50:05] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasfsf'
+[2026-06-14 23:50:05] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasfsfs'
+[2026-06-14 23:50:05] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasfsfsf'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasfsfs'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasfsf'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasfs'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfasf'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfas'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasfa'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afasf'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afas'
+[2026-06-14 23:50:06] [INFO] RefreshList called — g_chars.Length: 3 filter: 'afa'
+[2026-06-14 23:50:07] [INFO] RefreshList called — g_chars.Length: 3 filter: 'af'
+[2026-06-14 23:50:07] [INFO] RefreshList called — g_chars.Length: 3 filter: 'a'
+[2026-06-14 23:50:07] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-14 23:52:05] [LINE] ─────────────────────────────────────────────────────
+[2026-06-15 14:51:23] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 14:51:23] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 14:51:23] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 14:51:23] [INFO] File loaded — total records in file: 3
+[2026-06-15 14:51:23] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 14:51:23] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 14:51:23] [INFO] SortChars complete on key: name
+[2026-06-15 14:51:23] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 14:51:23] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 14:51:35] [INFO] SortChars complete on key: name
+[2026-06-15 14:51:35] [INFO] RefreshList called — g_chars.Length: 2 filter: ''
+[2026-06-15 14:53:14] [LINE] ─────────────────────────────────────────────────────
+[2026-06-15 14:54:44] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 14:54:44] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 14:54:44] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 14:54:44] [INFO] File loaded — total records in file: 3
+[2026-06-15 14:54:44] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 14:54:44] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 14:54:44] [INFO] SortChars complete on key: name
+[2026-06-15 14:54:44] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 14:54:44] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 14:55:32] [LINE] ─────────────────────────────────────────────────────
+[2026-06-15 14:57:09] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 14:57:09] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 14:57:09] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 14:57:09] [INFO] File loaded — total records in file: 3
+[2026-06-15 14:57:09] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 14:57:09] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 14:57:09] [INFO] SortChars complete on key: name
+[2026-06-15 14:57:09] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 14:57:09] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 14:57:54] [INFO] ManageProfiles — PG hwnd: 526608
+[2026-06-15 15:03:49] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:03:49] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:03:49] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:03:49] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:03:49] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:03:49] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:03:49] [INFO] SortChars complete on key: name
+[2026-06-15 15:03:49] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:03:49] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:05:09] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:05:09] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:05:09] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:05:09] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:05:09] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:05:09] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:05:09] [INFO] SortChars complete on key: name
+[2026-06-15 15:05:09] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:05:09] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:09:16] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:09:16] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:09:16] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:09:16] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:09:16] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:09:16] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:09:16] [INFO] SortChars complete on key: name
+[2026-06-15 15:09:16] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:09:16] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:09:17] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:09:17] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:09:17] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:09:17] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:09:17] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:09:17] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:09:17] [INFO] SortChars complete on key: name
+[2026-06-15 15:09:17] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:09:17] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:10:15] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:10:15] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:10:15] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:10:15] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:10:15] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:10:15] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:10:15] [INFO] SortChars complete on key: name
+[2026-06-15 15:10:15] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:10:15] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:11:18] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:11:18] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:11:18] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:11:18] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:11:18] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:11:18] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:11:18] [INFO] SortChars complete on key: name
+[2026-06-15 15:11:18] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:11:18] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:11:43] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:11:43] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:11:43] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:11:43] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:11:43] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:11:43] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:11:43] [INFO] SortChars complete on key: name
+[2026-06-15 15:11:43] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:11:43] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:12:50] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:12:50] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:12:50] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:12:50] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:12:50] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:12:50] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:12:50] [INFO] SortChars complete on key: name
+[2026-06-15 15:12:50] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:12:50] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:13:07] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:13:07] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:13:08] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:13:08] [INFO] File loaded — total records in file: 3
+[2026-06-15 15:13:08] [INFO] Records matching profile 'PEN': 3
+[2026-06-15 15:13:08] [INFO] About to call SortChars — g_chars.Length: 3
+[2026-06-15 15:13:08] [INFO] SortChars complete on key: name
+[2026-06-15 15:13:08] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:13:08] [INFO] RefreshList called — g_chars.Length: 3 filter: ''
+[2026-06-15 15:24:57] [INFO] SortChars complete on key: name
+[2026-06-15 15:24:57] [INFO] RefreshList called — g_chars.Length: 4 filter: ''
+[2026-06-15 15:27:45] [INFO] ProfileDB loaded — active profile: PEN
+[2026-06-15 15:27:45] [INFO] SaveCharDB — writing to: G:\WoW Character Database\records\PEN.json for profile: PEN
+[2026-06-15 15:27:45] [INFO] LoadCharDB called — looking for: G:\WoW Character Database\records\PEN.json
+[2026-06-15 15:27:45] [INFO] File loaded — total records in file: 4
+[2026-06-15 15:27:45] [INFO] Records matching profile 'PEN': 4
+[2026-06-15 15:27:45] [INFO] About to call SortChars — g_chars.Length: 4
+[2026-06-15 15:27:45] [INFO] SortChars complete on key: name
+[2026-06-15 15:27:45] [INFO] SortChars complete — about to call RefreshList
+[2026-06-15 15:27:45] [INFO] RefreshList called — g_chars.Length: 4 filter: ''
+[2026-06-15 15:28:35] [INFO] SortChars complete on key: name
+[2026-06-15 15:28:35] [INFO] RefreshList called — g_chars.Length: 4 filter: ''

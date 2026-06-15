@@ -1,0 +1,36 @@
+﻿{
+  "factions": ["Alliance", "Horde", "Neutral"],
+  "faction_races": {
+    "Alliance": ["Dark Iron Dwarf", "Dracthyr", "Draenei", "Dwarf", "Earthen", "Gnome", "Haranir", "Human", "Kul Tiran", "Lightforged Draenei", "Mechagnome", "Night Elf", "Pandaren", "Void Elf", "Worgen"],
+    "Horde":    ["Blood Elf", "Dracthyr", "Earthen", "Goblin", "Highmountain Tauren", "Haranir", "Mag'har Orc", "Nightborne", "Orc", "Pandaren", "Tauren", "Troll", "Undead", "Vulpera", "Zandalari Troll"],
+    "Neutral":  ["Dracthyr", "Earthen", "Haranir", "Pandaren"]
+    "Alliance_no_neutral": ["Dark Iron Dwarf", "Draenei", "Dwarf", "Gnome", "Human", "Kul Tiran", "Lightforged Draenei", "Mechagnome", "Night Elf", "Void Elf", "Worgen"],
+    "Horde_no_neutral":    ["Blood Elf", "Goblin", "Highmountain Tauren", "Mag'har Orc", "Nightborne", "Orc", "Tauren", "Troll", "Undead", "Vulpera", "Zandalari Troll"],
+    "Neutral_for_both":  ["Dracthyr", "Earthen", "Haranir", "Pandaren"]
+  },
+  "genders": ["Male", "Female"],
+  "classes": {
+    "Death Knight":  { "armor": "Plate",   "specs": ["Blood", "Frost", "Unholy"] },
+    "Demon Hunter":  { "armor": "Leather", "specs": ["Havoc", "Vengeance"] },
+    "Druid":         { "armor": "Leather", "specs": ["Balance", "Feral", "Guardian", "Restoration"] },
+    "Evoker":        { "armor": "Mail",    "specs": ["Augmentation", "Devastation", "Preservation"] },
+    "Hunter":        { "armor": "Mail",    "specs": ["Beast Mastery", "Marksmanship", "Survival"] },
+    "Mage":          { "armor": "Cloth",   "specs": ["Arcane", "Fire", "Frost"] },
+    "Monk":          { "armor": "Leather", "specs": ["Brewmaster", "Mistweaver", "Windwalker"] },
+    "Paladin":       { "armor": "Plate",   "specs": ["Holy", "Protection", "Retribution"] },
+    "Priest":        { "armor": "Cloth",   "specs": ["Discipline", "Holy", "Shadow"] },
+    "Rogue":         { "armor": "Leather", "specs": ["Assassination", "Outlaw", "Subtlety"] },
+    "Shaman":        { "armor": "Mail",    "specs": ["Elemental", "Enhancement", "Restoration"] },
+    "Warlock":       { "armor": "Cloth",   "specs": ["Affliction", "Demonology", "Destruction"] },
+    "Warrior":       { "armor": "Plate",   "specs": ["Arms", "Fury", "Protection"] }
+  },
+  "primary_professions": [
+    "Alchemy", "Blacksmithing", "Enchanting", "Engineering",
+    "Herbalism", "Inscription", "Jewelcrafting", "Leatherworking",
+    "Mining", "Skinning", "Tailoring"
+  ],
+  "secondary_professions": [
+    "Archaeology", "Cooking", "Fishing"
+  ],
+  "statuses": ["Active", "Alt", "Bank", "Main", "Retired", "Twink", "Unknown"]
+}

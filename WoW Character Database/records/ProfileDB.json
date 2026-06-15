@@ -1,0 +1,20 @@
+﻿{
+  "active_profile": "PEN",
+  "profiles": [
+    {
+      "created": "2026-06-13",
+      "name": "Default",
+      "notes": "Default profile"
+    },
+    {
+      "created": "2026-06-13",
+      "name": "PEN",
+      "notes": "Main"
+    },
+    {
+      "created": "2026-06-13",
+      "name": "PENalt",
+      "notes": "Alternate"
+    }
+  ]
+}
