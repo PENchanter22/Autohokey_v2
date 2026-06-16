@@ -58,7 +58,7 @@
     "Mining", "Skinning", "Tailoring"
   ],
   "secondary_professions": [
-    "Archaeology", "Cooking", "Fishing"
+    "Cooking", "Fishing", "Archaeology"
   ],
   "realms": [
     { "name": "Aegwynn",               "url": "aegwynn" },
