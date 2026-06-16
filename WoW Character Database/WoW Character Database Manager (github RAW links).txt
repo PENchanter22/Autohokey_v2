@@ -1,0 +1,16 @@
+﻿WoW Character Database Manager
+
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/Character%20Database%20Manager.ahk
+
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/CharacterDB.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/Helpers.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/JSON.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/Logger.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/ProfileDB.ahk
+
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/references/StaticData.json
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/references/staticdata.ini
+
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/ProfileDB.json
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/PEN.json
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/GuildNames.json
