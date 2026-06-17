@@ -18,6 +18,7 @@ SetWorkingDir A_ScriptDir
 
 #Include .\functions\
 #Include GlobalVARS.ahk
+#Include ListViewDraw.ahk
 #Include Helpers.ahk
 #Include ProfileDB.ahk
 #Include CharacterDB.ahk
@@ -116,6 +117,8 @@ LV.ModifyCol(16,  80)   ; Status
 LV.OnEvent("ItemSelect",  LV_Select)
 LV.OnEvent("DoubleClick", (*) => EditEntry())
 LV.OnEvent("ColClick",    LV_ColClick)
+
+InitListViewDraw(LV)
 
 ; ── Toolbar buttons — centered ───────────────────────────────
 BTN_ROW_W := BTN_COUNT * BTN_W + (BTN_COUNT - 1) * BTN_GAP
