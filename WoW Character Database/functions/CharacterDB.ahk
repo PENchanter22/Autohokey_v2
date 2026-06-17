@@ -117,6 +117,7 @@ RefreshList(filter := "") {
             ch.Get("status",  ""))
     }
     SetStatus("Found " n " character(s) for: " ActivePro)
+    AutoFitLVCols()
 }
 
 LV_Select(ctrl, rowNum, *) {
