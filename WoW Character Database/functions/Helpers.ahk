@@ -1,4 +1,4 @@
-﻿; ============================================================
+; ============================================================
 ;  Helpers.ahk — Utility functions
 ;  Include this file from the master script.
 ; ============================================================
@@ -87,49 +87,53 @@ TopMsgBox(text, title := "", flags := 262208) {
 
 ; Custom InputBox replacement — always stays on top of everything
 ShowInput(prompt, title := "", default := "") {
-    global MyGui
+    global MyGui, FS_NORM, FS_BOLD, CTL_H
+    EDIT_Y  := 10 + FS_NORM + 10          ; below prompt text
+    BTN_Y   := EDIT_Y + CTL_H + 10        ; below edit box
+    DLG_W   := 320
     D := Gui("+AlwaysOnTop +OwnDialogs", title)
-    D.SetFont("s12", "Segoe UI")
+    D.SetFont("s" FS_NORM, "Segoe UI")
     D.BackColor := "1E1E2E"
     D.Add("Text", "x10 y10 w300 cCDD6F4", prompt)
-    EVal := D.Add("Edit", "x10 y36 w300 h26 Background2A2A3E cCDD6F4")
+    EVal := D.Add("Edit", "x10 y" EDIT_Y " w300 h" CTL_H " Background2A2A3E cCDD6F4")
     EVal.Value := default
-    D.SetFont("s12 Bold cCDD6F4")
-    BtnOK  := D.Add("Button", "x10  y72 w100 h28 Default Background3D3D5C", "&OK")
-    BtnCan := D.Add("Button", "x118 y72 w100 h28 Background3D3D5C cFF6B6B", "&Cancel")
+    D.SetFont("s" FS_BOLD " Bold cCDD6F4")
+    BtnOK  := D.Add("Button", "x10  y" BTN_Y " w100 h" CTL_H " Default Background3D3D5C", "&OK")
+    BtnCan := D.Add("Button", "x118 y" BTN_Y " w100 h" CTL_H " Background3D3D5C cFF6B6B", "&Cancel")
     result := Map("Result", "Cancel", "Value", "")
     BtnOK.OnEvent("Click", (*) => (result["Result"] := "OK", result["Value"] := EVal.Value, D.Destroy()))
     BtnCan.OnEvent("Click", (*) => D.Destroy())
     D.OnEvent("Close", (*) => D.Destroy())
-    D.Show("w320 AutoSize")
+    D.Show("w" DLG_W " AutoSize")
     WinWaitClose(D)
     return result
 }
 
 ; Custom MsgBox replacement — always stays on top of everything
 ShowMsg(text, title := "", flags := 262208) {
-    global MyGui
-    ; Determine buttons from flags
+    global MyGui, FS_NORM, FS_BOLD, CTL_H
     btnType := flags & 0xF
+    BTN_Y   := 10 + FS_NORM + 14          ; below message text
+    DLG_W   := 360
     D := Gui("+AlwaysOnTop +OwnDialogs", title)
-    D.SetFont("s12", "Segoe UI")
+    D.SetFont("s" FS_NORM, "Segoe UI")
     D.BackColor := "1E1E2E"
     D.Add("Text", "x10 y10 w340 cCDD6F4", text)
     result := Map("Value", "OK")
-    D.SetFont("s12 Bold cCDD6F4")
+    D.SetFont("s" FS_BOLD " Bold cCDD6F4")
     if btnType == 4 {
         ; Yes/No
-        BtnY := D.Add("Button", "x10  y60 w100 h28 Default Background3D3D5C cA6E3A1", "&Yes")
-        BtnN := D.Add("Button", "x118 y60 w100 h28 Background3D3D5C cFF6B6B", "&No")
+        BtnY := D.Add("Button", "x10  y" BTN_Y " w100 h" CTL_H " Default Background3D3D5C cA6E3A1", "&Yes")
+        BtnN := D.Add("Button", "x118 y" BTN_Y " w100 h" CTL_H " Background3D3D5C cFF6B6B", "&No")
         BtnY.OnEvent("Click", (*) => (result["Value"] := "Yes", D.Destroy()))
         BtnN.OnEvent("Click", (*) => (result["Value"] := "No",  D.Destroy()))
     } else {
         ; OK only
-        BtnOK := D.Add("Button", "x10 y60 w100 h28 Default Background3D3D5C", "&OK")
+        BtnOK := D.Add("Button", "x10 y" BTN_Y " w100 h" CTL_H " Default Background3D3D5C", "&OK")
         BtnOK.OnEvent("Click", (*) => D.Destroy())
     }
     D.OnEvent("Close", (*) => D.Destroy())
-    D.Show("w360 AutoSize")
+    D.Show("w" DLG_W " AutoSize")
     WinWaitClose(D)
     return result["Value"]
 }
