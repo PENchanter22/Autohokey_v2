@@ -2,7 +2,8 @@
 ;  ⚔  Character Manager — Master Script
 ;  Handles GUI layout only. All logic is in included files.
 ;
-;  Required files (same folder as this script):
+;  Required files (in there own subfolder of this script):
+;    GlobalVARS.ahk    — Global Variables
 ;    JSON.ahk          — JSON parser & stringifier
 ;    Helpers.ahk       — Utility functions
 ;    ProfileDB.ahk     — Profile management
@@ -16,7 +17,7 @@
 SetWorkingDir A_ScriptDir
 
 #Include .\functions\
-#Include global_variables.ahk
+#Include GlobalVARS.ahk
 #Include Helpers.ahk
 #Include ProfileDB.ahk
 #Include CharacterDB.ahk
