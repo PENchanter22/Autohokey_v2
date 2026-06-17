@@ -42,3 +42,11 @@ global PRO_BTN_W :=  160 ; "Manage Profiles" button width
 
 global SRCH_W   :=   260  ; search edit width
 global SRCH_LBL_W :=  60 ; "Search:" label width
+
+; ── ListView appearance ───────────────────────────────────────
+global LV_FS         := 13       ; ListView font size (separate from FS_NORM)
+global LV_ROW_ODD    := 0x1A1A2E ; odd row background  (current base color)
+global LV_ROW_EVEN   := 0x2A2A3E ; even row background (slightly lighter)
+global LV_ROW_SEL    := 0x45475A ; selected row background
+global LV_TEXT       := 0xCDD6F4 ; normal row text color
+global LV_TEXT_SEL   := 0xFFFFFF ; selected row text color
