@@ -146,6 +146,7 @@ AutoFitLVCols() {
 
 ; ── Show & load ──────────────────────────────────────────────
 MyGui.Show("w" GUI_W " h" GUI_H)
+RoundCorners(MyGui.Hwnd)   ; ← add this
 WinRedraw("ahk_id " MyGui.Hwnd)
 LoadProfileDB()
 
