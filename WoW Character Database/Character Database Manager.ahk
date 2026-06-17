@@ -97,23 +97,7 @@ global LV := MyGui.Add("ListView",
     ["Name","Level","Realm","Guild","Faction","Race","Gender",
      "Class","Spec","Armor","Prof 1","Prof 2","Sec 1","Sec 2","Sec 3","Status"])
 
-; Col widths — first 10 cols visible without scrolling
-LV.ModifyCol( 1, 130)   ; Name
-LV.ModifyCol( 2,  55)   ; Level
-LV.ModifyCol( 3, 120)   ; Realm
-LV.ModifyCol( 4, 120)   ; Guild
-LV.ModifyCol( 5,  80)   ; Faction
-LV.ModifyCol( 6, 100)   ; Race
-LV.ModifyCol( 7,  70)   ; Gender
-LV.ModifyCol( 8, 110)   ; Class
-LV.ModifyCol( 9, 110)   ; Spec
-LV.ModifyCol(10,  65)   ; Armor  ← last fully visible
-LV.ModifyCol(11, 120)   ; Prof 1
-LV.ModifyCol(12, 120)   ; Prof 2
-LV.ModifyCol(13,  90)   ; Sec 1
-LV.ModifyCol(14,  90)   ; Sec 2
-LV.ModifyCol(15,  90)   ; Sec 3
-LV.ModifyCol(16,  80)   ; Status
+LV.ModifyCol(2, "Center")   ; Level — pre-set centering before first data load
 
 LV.OnEvent("ItemSelect",  LV_Select)
 LV.OnEvent("DoubleClick", (*) => EditEntry())
@@ -151,6 +135,14 @@ global StatusBar := MyGui.Add("Text",
     "x0 y" SB_Y " w" GUI_W " h" SB_H " Background2A2A3E cCDD6F4",
     "  Loading…")
 StatusBar.SetFont("s" FS_SB, "Segoe UI")
+
+AutoFitLVCols() {
+    global LV
+    loop LV.GetCount("Column") {
+        LV.ModifyCol(A_Index, "AutoHdr")
+    }
+    LV.ModifyCol(2, "Center")   ; re-apply Level centering after fit
+}
 
 ; ── Show & load ──────────────────────────────────────────────
 MyGui.Show("w" GUI_W " h" GUI_H)
