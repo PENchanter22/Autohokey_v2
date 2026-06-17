@@ -115,7 +115,7 @@ DDProfile.OnEvent("Change", OnProfileChange)
 
 MyGui.SetFont("s" FS_BOLD " Bold cCDD6F4")
 BtnManPro := MyGui.Add("Button",
-    "x" (PAD + PRO_LBL_W + 4 + PRO_DDL_W + 8) " y" ROW1_Y " w" PRO_BTN_W " h" CTL_H " Background3D3D5C",
+    "x" (PAD + PRO_LBL_W + 4 + PRO_DDL_W + 8) " y" ROW1_Y " w" (PRO_BTN_W + 32) " h" CTL_H " Background3D3D5C",
     "⚙ &Manage Profiles")
 BtnManPro.OnEvent("Click", (*) => ManageProfiles())
 
