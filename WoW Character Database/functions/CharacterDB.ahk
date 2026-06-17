@@ -1,4 +1,4 @@
-﻿; ============================================================
+; ============================================================
 ;  CharacterDB.ahk — Character CRUD, list, sort, entry dialog
 ;  Include this file from the master script.
 ; ============================================================
@@ -19,7 +19,6 @@ LoadCharDB() {
     Log("LoadCharDB called — looking for: " f)
     if !FileExist(f) {
         Log("File not found: " f, "WARN")
-;        SetStatus("No characters found for: " ActivePro, "warn")
         SetStatus("No file found at: " CharFile(), "warn")
         RefreshList()
         return
@@ -27,7 +26,6 @@ LoadCharDB() {
     try {
         all := JsonParse(FileRead(f, "UTF-8"))
         Log("File loaded — total records in file: " all.Length)
-        ; Filter to only characters belonging to this profile
         g_chars := []
         loop all.Length {
             ch := all[A_Index]
@@ -42,14 +40,13 @@ LoadCharDB() {
         RefreshList()
         SetStatus("Found " g_chars.Length " character(s) for: " ActivePro)
     } catch as e {
-		ShowMsg("Failed to load character file:`n" e.Message, "Load Error")
+        ShowMsg("Failed to load character file:`n" e.Message, "Load Error")
     }
 }
 
 SaveCharDB() {
     global g_chars, ActivePro
     try {
-        ; Read existing file to preserve characters from other profiles
         f   := CharFile()
         all := []
         if FileExist(f) {
@@ -61,23 +58,20 @@ SaveCharDB() {
                 }
             }
         }
-        ; Append current profile's characters (with profile field set)
         loop g_chars.Length {
             ch := g_chars[A_Index]
             ch["profile"] := ActivePro
             all.Push(ch)
         }
-        ; Build ordered JSON manually for character array
         charParts := []
         loop all.Length {
             charParts.Push("  " JsonStringifyChar(all[A_Index], 1))
         }
         output := "[`n" JoinArr(charParts, ",`n") "`n]"
         FileOpen(f, "w", "UTF-8").Write(output)
-;        FileOpen(f, "w", "UTF-8").Write(JsonStringify(all))
         SetStatus("Saved " g_chars.Length " character(s) for: " ActivePro, "ok")
     } catch as e {
-		ShowMsg("Failed to save:`n" e.Message, "Save Error")
+        ShowMsg("Failed to save:`n" e.Message, "Save Error")
     }
 }
 
@@ -90,10 +84,11 @@ RefreshList(filter := "") {
     n := 0
     loop g_chars.Length {
         ch := g_chars[A_Index]
-;        Log("RefreshList — row " A_Index ": " ch.Get("name","(no name)"), "DEBUG")
         if filter != "" {
             hit := false
-            for _, fld in ["name", "class", "race", "realm", "guild", "spec"] {
+            for _, fld in ["name", "level", "realm", "guild", "faction", "race", "gender",
+                           "class", "spec", "armor", "prof1", "prof2", "sec1", "sec2", "sec3",
+                           "status", "notes"] {
                 if InStr(ch.Get(fld, ""), filter, false) {
                     hit := true
                 }
@@ -127,7 +122,6 @@ RefreshList(filter := "") {
 LV_Select(ctrl, rowNum, *) {
     global g_selIdx
     if rowNum > 0 {
-        ; Match visible row back to g_chars by name
         name := ctrl.GetText(rowNum, 1)
         g_selIdx := 0
         loop g_chars.Length {
@@ -166,15 +160,13 @@ SortChars() {
     while i < n {
         j := 1
         while j < n - i + 1 {
-;            Log("SortChars comparing j=" j " of n=" n " key=" key, "DEBUG")
             a := String(g_chars[j].Get(key, ""))
             b := String(g_chars[j + 1].Get(key, ""))
-;            Log("SortChars a='" a "' b='" b "'", "DEBUG")
             if key == "level" {
                 numA := a != "" ? Integer(a) : 0
                 numB := b != "" ? Integer(b) : 0
                 doSwap := g_sortAsc ? (numA > numB) : (numA < numB)
-             } else {
+            } else {
                 cmp    := StrCompare(a, b, false)
                 doSwap := g_sortAsc ? (cmp > 0) : (cmp < 0)
             }
@@ -184,7 +176,6 @@ SortChars() {
     }
     Log("SortChars complete on key: " key)
 }
-
 
 ; ── CRUD ─────────────────────────────────────────────────────
 
@@ -238,7 +229,7 @@ DeleteEntry() {
 ; ── Entry Dialog ─────────────────────────────────────────────
 
 ShowEntryDialog(title, ch := "") {
-    global SD
+    global SD, FS_NORM, FS_BOLD, CTL_H
     isNew := (ch == "")
     if isNew {
         ch := Map(
@@ -254,19 +245,21 @@ ShowEntryDialog(title, ch := "") {
     }
 
     D := Gui("+OwnDialogs +AlwaysOnTop", title)
-    D.SetFont("s12", "Segoe UI")
+    D.SetFont("s" FS_NORM, "Segoe UI")
     D.BackColor := "1E1E2E"
-    D.SetFont("s12 cCDD6F4", "Segoe UI")
+    D.SetFont("s" FS_NORM " cCDD6F4", "Segoe UI")
 
-    lw := 110
-    fw := 220
-    px := 14
-    y  := 16
+    lw      := 110           ; label width
+    fw      := 220           ; field width
+    px      := 14            ; left padding
+    ROW_H   := CTL_H + 6    ; row step — control height + breathing room
+    NOTE_H  := CTL_H * 2    ; notes edit — approx two rows tall
+    y       := 16
 
     AddRow(lbl, type, opts) {
         D.Add("Text", "x" px " y" (y + 4) " w" lw " cCDD6F4", lbl)
         ctrl := D.Add(type, "x" (px + lw) " y" y " w" fw " " opts " Background2A2A3E cCDD6F4")
-        y += 32
+        y += ROW_H
         return ctrl
     }
 
@@ -355,13 +348,13 @@ ShowEntryDialog(title, ch := "") {
 
     D.Add("Text", "x" px " y" (y + 4) " w" lw " cCDD6F4", "Notes:")
     ENotes := D.Add("Edit",
-        "x" (px + lw) " y" y " w" fw " h60 Multi VScroll Background2A2A3E cCDD6F4")
+        "x" (px + lw) " y" y " w" fw " h" NOTE_H " Multi VScroll Background2A2A3E cCDD6F4")
     ENotes.Value := ch.Get("notes", "")
-    y += 70
+    y += NOTE_H + 10
 
-    D.SetFont("s12 Bold cCDD6F4")
-    BtnOK  := D.Add("Button", "x" (px + lw)       " y" y " w100 h30 Default Background3D3D5C", "&OK")
-    BtnCan := D.Add("Button", "x" (px + lw + 110) " y" y " w100 h30 Background3D3D5C cFF6B6B",  "&Cancel")
+    D.SetFont("s" FS_BOLD " Bold cCDD6F4")
+    BtnOK  := D.Add("Button", "x" (px + lw)       " y" y " w100 h" CTL_H " Default Background3D3D5C", "&OK")
+    BtnCan := D.Add("Button", "x" (px + lw + 110) " y" y " w100 h" CTL_H " Background3D3D5C cFF6B6B",  "&Cancel")
 
     result := Map()
 
@@ -454,21 +447,6 @@ ShowEntryDialog(title, ch := "") {
         }
     }
 
-    DDFac  .OnEvent("Change", UpdateRaces)
-    DDClass.OnEvent("Change", UpdateSpecs)
-    DDProf1.OnEvent("Change", UpdateProfDDs)
-    DDProf2.OnEvent("Change", UpdateProfDDs)
-    DDSec1 .OnEvent("Change", UpdateSecDDs)
-    DDSec2 .OnEvent("Change", UpdateSecDDs)
-    DDSec3 .OnEvent("Change", UpdateSecDDs)
-    BtnOK  .OnEvent("Click", ConfirmDlg)
-    BtnCan .OnEvent("Click", (*) => D.Destroy())
-
-    UpdateRaces()
-    DDRace.Value := Max(1, FindInArr(GetRaceList(DDFac.Text), ch.Get("race", "Human")))
-    UpdateSpecs()
-    DDSpec.Value := Max(1, FindInArr(GetSpecList(DDClass.Text), ch.Get("spec", "")))
-
     ConfirmDlg(*) {
         n := Trim(EName.Value)
         if n == "" {
@@ -496,9 +474,6 @@ ShowEntryDialog(title, ch := "") {
         D.Destroy()
     }
 
-; ── REPLACE the existing OnEvent block (the three lines before D.Show)
-;    with this expanded version ──────────────────────────────
-
     DDFac  .OnEvent("Change", UpdateRaces)
     DDClass.OnEvent("Change", UpdateSpecs)
     DDProf1.OnEvent("Change", UpdateProfDDs)
@@ -506,6 +481,13 @@ ShowEntryDialog(title, ch := "") {
     DDSec1 .OnEvent("Change", UpdateSecDDs)
     DDSec2 .OnEvent("Change", UpdateSecDDs)
     DDSec3 .OnEvent("Change", UpdateSecDDs)
+    BtnOK  .OnEvent("Click", ConfirmDlg)
+    BtnCan .OnEvent("Click", (*) => D.Destroy())
+
+    UpdateRaces()
+    DDRace.Value := Max(1, FindInArr(GetRaceList(DDFac.Text), ch.Get("race", "Human")))
+    UpdateSpecs()
+    DDSpec.Value := Max(1, FindInArr(GetSpecList(DDClass.Text), ch.Get("spec", "")))
 
     D.Show("w" (px * 2 + lw + fw + 20) " AutoSize")
     WinWaitClose(D)
