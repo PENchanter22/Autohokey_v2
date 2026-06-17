@@ -143,3 +143,9 @@ ShowMsg(text, title := "", flags := 262208) {
 RoundCorners(hwnd) {
     DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", hwnd, "UInt", 33, "UInt*", 2, "UInt", 4)
 }
+
+SetDirty() {
+    global StatusBar
+    StatusBar.SetFont("cF9E2AF")
+    StatusBar.Value := "  -:*:- Please [Save] any new changes!! -:*:-"
+}
