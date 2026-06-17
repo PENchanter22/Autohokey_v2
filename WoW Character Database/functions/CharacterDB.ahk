@@ -491,6 +491,7 @@ ShowEntryDialog(title, ch := "") {
     DDSpec.Value := Max(1, FindInArr(GetSpecList(DDClass.Text), ch.Get("spec", "")))
 
     D.Show("w" (px * 2 + lw + fw + 20) " AutoSize")
+    RoundCorners(D.Hwnd)   ; ← add this
     WinWaitClose(D)
     return result
 }
