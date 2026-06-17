@@ -1,4 +1,4 @@
-﻿; ============================================================
+; ============================================================
 ;  ⚔  Character Manager — Master Script
 ;  Handles GUI layout only. All logic is in included files.
 ;
@@ -42,69 +42,94 @@ if !FileExist(F_STATIC) {
 }
 SD := JsonParse(FileRead(F_STATIC, "UTF-8"))
 
+; ── Font sizes ───────────────────────────────────────────────
+global FS_NORM  := 14   ; normal text, labels, dropdowns  (was 12)
+global FS_TITLE := 16   ; title bar text                  (was 14)
+global FS_BOLD  := 14   ; toolbar & dialog buttons        (was 12)
+global FS_SB    := 14   ; status bar                      (was 12)
+; Note: [X] and [_] buttons intentionally kept at s10 Bold
+
 ; ── GUI dimensions ───────────────────────────────────────────
-GUI_W  := 1100
-GUI_H  := 620
-PAD    := 10
-TBAR_H := 38    ; title bar height
-BTN_H  := 34    ; toolbar button height
-SB_H   := 24    ; status bar height
+global GUI_W    :=  1100
+global GUI_H    :=   620
+global PAD      :=    10
+
+global TBAR_H   :=    42   ; title bar height        (was 38)
+global TBAR_W   :=     0    ; set below after BTN_X_W is known
+
+global BTN_XW   :=    28   ; [X] / [_] button width
+global BTN_XH   :=    28   ; [X] / [_] button height
+global BTN_XG   :=     4    ; gap from right edge / between X buttons
+
+global CTL_H    :=    30   ; standard control height (edits, DDLs) (was 28)
+global BTN_H    :=    38   ; toolbar button height                  (was 34)
+global BTN_W    :=   120  ; toolbar button width
+global BTN_GAP  :=    10   ; gap between toolbar buttons
+global BTN_COUNT :=    4
+
+global SB_H     :=    28   ; status bar height       (was 24)
+
+global PRO_LBL_W :=   70  ; "Profile:" label width
+global PRO_DDL_W :=  200 ; profile dropdown width
+global PRO_BTN_W :=  160 ; "Manage Profiles" button width
+
+global SRCH_W   :=   260  ; search edit width
+global SRCH_LBL_W :=  60 ; "Search:" label width
 
 ; ── Main GUI — fixed size, always on top, no caption ─────────
 global MyGui := Gui("-Caption +AlwaysOnTop", "CharDB")
-MyGui.SetFont("s12", "Segoe UI")
+MyGui.SetFont("s" FS_NORM, "Segoe UI")
 MyGui.BackColor := "1E1E2E"
 MyGui.OnEvent("Close", CloseApp)
 
-; [X] close button — right side of title bar
+; [X] close and [_] minimise buttons — top-right of title bar
 MyGui.SetFont("s10 Bold cFF6B6B", "Segoe UI")
 BtnX := MyGui.Add("Button",
-    "x" (GUI_W - 36) " y4 w28 h28 Background2A2A3E",
+    "x" (GUI_W - BTN_XW - BTN_XG) " y" BTN_XG " w" BTN_XW " h" BTN_XH " Background2A2A3E",
     "X")
 BtnX.OnEvent("Click", CloseApp)
-; BtnX.OnEvent("Click", (*) => ExitApp())
+
+MyGui.SetFont("s10 Bold cF9E2AF", "Segoe UI")
 BtnMin := MyGui.Add("Button",
-    "x" (GUI_W - 68) " y4 w28 h28 Background2A2A3E cF9E2AF",
+    "x" (GUI_W - BTN_XW*2 - BTN_XG*2) " y" BTN_XG " w" BTN_XW " h" BTN_XH " Background2A2A3E",
     "_")
 BtnMin.OnEvent("Click", MinimizeApp)
 
 ; ── Title bar ────────────────────────────────────────────────
-; BTN_X_W := 36   ; [X] button width
-BTN_X_W := 72   ; [X] button width to accommodate the minimize button to its left
+BTN_X_W := BTN_XW*2 + BTN_XG*3   ; total width consumed by X + _ buttons
 TBAR_W  := GUI_W - BTN_X_W
 global TitleBar := MyGui.Add("Text",
     "x0 y0 w" TBAR_W " h" TBAR_H " +0x200 Background2A2A3E cCDD6F4 Center",
     "")
-TitleBar.SetFont("s14 Bold", "Segoe UI")
+TitleBar.SetFont("s" FS_TITLE " Bold", "Segoe UI")
 TitleBar.OnEvent("Click", DragWindow)
 
 ; ── Profile row ──────────────────────────────────────────────
 ROW1_Y := TBAR_H + 8
-MyGui.SetFont("s12 Norm cCDD6F4", "Segoe UI")
-MyGui.Add("Text", "x" PAD " y" (ROW1_Y + 4) " w70", "Profile:")
+MyGui.SetFont("s" FS_NORM " Norm cCDD6F4", "Segoe UI")
+MyGui.Add("Text", "x" PAD " y" (ROW1_Y + 4) " w" PRO_LBL_W, "Profile:")
 
 global DDProfile := MyGui.Add("DropDownList",
-    "x" (PAD + 74) " y" ROW1_Y " w200 h300 Background2A2A3E cCDD6F4")
+    "x" (PAD + PRO_LBL_W + 4) " y" ROW1_Y " w" PRO_DDL_W " h300 Background2A2A3E cCDD6F4")
 DDProfile.OnEvent("Change", OnProfileChange)
 
-MyGui.SetFont("s12 Bold cCDD6F4")
+MyGui.SetFont("s" FS_BOLD " Bold cCDD6F4")
 BtnManPro := MyGui.Add("Button",
-    "x" (PAD + 282) " y" ROW1_Y " w160 h28 Background3D3D5C",
+    "x" (PAD + PRO_LBL_W + 4 + PRO_DDL_W + 8) " y" ROW1_Y " w" PRO_BTN_W " h" CTL_H " Background3D3D5C",
     "⚙ &Manage Profiles")
 BtnManPro.OnEvent("Click", (*) => ManageProfiles())
 
 ; Search — right-aligned on the same row
-SRCH_W := 260
-MyGui.SetFont("s12 Norm cCDD6F4")
+MyGui.SetFont("s" FS_NORM " Norm cCDD6F4")
 MyGui.Add("Text",
-    "x" (GUI_W - PAD - SRCH_W - 68) " y" (ROW1_Y + 4) " w60",
+    "x" (GUI_W - PAD - SRCH_W - SRCH_LBL_W - 8) " y" (ROW1_Y + 4) " w" SRCH_LBL_W,
     "Search:")
 global EditSearch := MyGui.Add("Edit",
-    "x" (GUI_W - PAD - SRCH_W) " y" ROW1_Y " w" SRCH_W " h28 Background2A2A3E cCDD6F4")
+    "x" (GUI_W - PAD - SRCH_W) " y" ROW1_Y " w" SRCH_W " h" CTL_H " Background2A2A3E cCDD6F4")
 EditSearch.OnEvent("Change", (*) => RefreshList(EditSearch.Value))
 
 ; ── ListView ─────────────────────────────────────────────────
-LV_Y := ROW1_Y + 38
+LV_Y := ROW1_Y + CTL_H + 8
 LV_H := GUI_H - LV_Y - BTN_H - SB_H - 28
 
 global LV := MyGui.Add("ListView",
@@ -136,14 +161,11 @@ LV.OnEvent("DoubleClick", (*) => EditEntry())
 LV.OnEvent("ColClick",    LV_ColClick)
 
 ; ── Toolbar buttons — centered ───────────────────────────────
-BTN_W   := 120
-BTN_GAP := 10
-BTN_COUNT := 4
 BTN_ROW_W := BTN_COUNT * BTN_W + (BTN_COUNT - 1) * BTN_GAP
 BTN_Y  := LV_Y + LV_H + 8
 BTN_X1 := (GUI_W - BTN_ROW_W) // 2
 
-MyGui.SetFont("s12 Bold cCDD6F4")
+MyGui.SetFont("s" FS_BOLD " Bold cCDD6F4")
 BtnNew  := MyGui.Add("Button",
     "x" BTN_X1                              " y" BTN_Y " w" BTN_W " h" BTN_H " Background3D3D5C",
     "➕ &New")
@@ -167,7 +189,7 @@ SB_Y := GUI_H - SB_H - 4
 global StatusBar := MyGui.Add("Text",
     "x0 y" SB_Y " w" GUI_W " h" SB_H " Background2A2A3E cCDD6F4",
     "  Loading…")
-StatusBar.SetFont("s12", "Segoe UI")
+StatusBar.SetFont("s" FS_SB, "Segoe UI")
 
 ; ── Show & load ──────────────────────────────────────────────
 MyGui.Show("w" GUI_W " h" GUI_H)
