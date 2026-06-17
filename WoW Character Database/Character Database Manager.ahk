@@ -4,6 +4,7 @@
 ;
 ;  Required files (in there own subfolder of this script):
 ;    GlobalVARS.ahk    — Global Variables
+;    ListViewDraw.ahk  — ListView designer
 ;    JSON.ahk          — JSON parser & stringifier
 ;    Helpers.ahk       — Utility functions
 ;    ProfileDB.ahk     — Profile management
