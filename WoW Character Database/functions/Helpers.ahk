@@ -105,6 +105,7 @@ ShowInput(prompt, title := "", default := "") {
     BtnCan.OnEvent("Click", (*) => D.Destroy())
     D.OnEvent("Close", (*) => D.Destroy())
     D.Show("w" DLG_W " AutoSize")
+	RoundCorners(D.Hwnd)   ; ← add this
     WinWaitClose(D)
     return result
 }
@@ -134,6 +135,11 @@ ShowMsg(text, title := "", flags := 262208) {
     }
     D.OnEvent("Close", (*) => D.Destroy())
     D.Show("w" DLG_W " AutoSize")
+	RoundCorners(D.Hwnd)   ; ← add this
     WinWaitClose(D)
     return result["Value"]
+}
+
+RoundCorners(hwnd) {
+    DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", hwnd, "UInt", 33, "UInt*", 2, "UInt", 4)
 }
