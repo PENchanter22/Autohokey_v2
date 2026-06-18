@@ -1,12 +1,8 @@
 {
-  "factions": ["Alliance", "Horde", "Neutral"],
+  "factions": ["Alliance", "Horde"],
   "faction_races": {
     "Alliance": ["Dark Iron Dwarf", "Dracthyr", "Draenei", "Dwarf", "Earthen", "Gnome", "Haranir", "Human", "Kul Tiran", "Lightforged Draenei", "Mechagnome", "Night Elf", "Pandaren", "Void Elf", "Worgen"],
-    "Horde":    ["Blood Elf", "Dracthyr", "Earthen", "Goblin", "Haranir", "Highmountain Tauren", "Mag'har Orc", "Nightborne", "Orc", "Pandaren", "Tauren", "Troll", "Undead", "Vulpera", "Zandalari Troll"],
-    "Neutral":  ["Dracthyr", "Earthen", "Haranir", "Pandaren"],
-    "Alliance_no_neutral": ["Dark Iron Dwarf", "Draenei", "Dwarf", "Gnome", "Human", "Kul Tiran", "Lightforged Draenei", "Mechagnome", "Night Elf", "Void Elf", "Worgen"],
-    "Horde_no_neutral":    ["Blood Elf", "Goblin", "Highmountain Tauren", "Mag'har Orc", "Nightborne", "Orc", "Tauren", "Troll", "Undead", "Vulpera", "Zandalari Troll"],
-    "Neutral_for_both":    ["Dracthyr", "Earthen", "Haranir", "Pandaren"]
+    "Horde":    ["Blood Elf", "Dracthyr", "Earthen", "Goblin", "Haranir", "Highmountain Tauren", "Mag'har Orc", "Nightborne", "Orc", "Pandaren", "Tauren", "Troll", "Undead", "Vulpera", "Zandalari Troll"]
   },
   "racial_classes": {
     "Blood Elf":           ["Death Knight", "Demon Hunter", "Hunter", "Mage", "Monk", "Paladin", "Priest", "Rogue", "Warlock", "Warrior"],
