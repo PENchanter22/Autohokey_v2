@@ -4,16 +4,28 @@ https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%
 
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/CharacterDB.ahk
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/GlobalVARS.ahk
-https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/Helpers.ahk
-https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/ListViewDraw.ahk
-https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/JSON.ahk
-https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/Logger.ahk
-https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/RealmSearch.ahk
-https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/ProfileDB.ahk
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/GuildDB.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/Helpers.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/JSON.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/ListViewDraw.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/Logger.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/ProfileDB.ahk
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/functions/RealmSearch.ahk
 
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/references/StaticData.json
 
-https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/ProfileDB.json
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/CharacterIndex.json
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/GuildDB.json
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/ProfileDB.json
+
+SetWorkingDir A_ScriptDir
+#Include .\functions\
+#Include GlobalVARS.ahk
+#Include Helpers.ahk
+#Include ListViewDraw.ahk
+#Include JSON.ahk
+#Include Logger.ahk
+#Include CharacterDB.ahk
+#Include GuildDB.ahk
+#Include ProfileDB.ahk
+#Include RealmSearch.ahk
