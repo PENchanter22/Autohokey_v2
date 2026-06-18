@@ -15,4 +15,5 @@ https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/references/StaticData.json
 
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/ProfileDB.json
+https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/CharacterIndex.json
 https://raw.githubusercontent.com/PENchanter22/Autohokey_v2/refs/heads/main/WoW%20Character%20Database/records/GuildDB.json
