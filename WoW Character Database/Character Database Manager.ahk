@@ -23,10 +23,10 @@ SetWorkingDir A_ScriptDir
 #Include ListViewDraw.ahk
 #Include JSON.ahk
 #Include Logger.ahk
-#Include CharacterDB.ahk
-#Include GuildDB.ahk
-#Include ProfileDB.ahk
 #Include RealmSearch.ahk
+#Include ProfileDB.ahk
+#Include GuildDB.ahk
+#Include CharacterDB.ahk
 
 Tooltipping("show")
 
