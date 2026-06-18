@@ -19,12 +19,14 @@ SetWorkingDir A_ScriptDir
 
 #Include .\functions\
 #Include GlobalVARS.ahk
-#Include ListViewDraw.ahk
 #Include Helpers.ahk
-#Include ProfileDB.ahk
-#Include CharacterDB.ahk
+#Include ListViewDraw.ahk
 #Include JSON.ahk
 #Include Logger.ahk
+#Include CharacterDB.ahk
+#Include GuildDB.ahk
+#Include ProfileDB.ahk
+#Include RealmSearch.ahk
 
 Tooltipping("show")
 
