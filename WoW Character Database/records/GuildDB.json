@@ -1,49 +1,11 @@
-{
+﻿{
   "guilds": [
-    {
-      "created": "2026-06-13",
-      "name": "Deyhide",
-      "leader": "Talyka",
-	  "realm": "Shadowsong",
-      "faction": "Horde",
-	  "funds": "",
-      "notes": ""
-    },
-    {
-      "created": "2026-06-13",
-      "name": "Friends of Elphaba",
-      "leader": "EarcenCovene",
-	  "realm": "Shadowsong",
-      "faction": "Alliance",
-	  "funds": "",
-      "notes": ""
-    },
-    {
-      "created": "2026-06-13",
-      "name": "Instant Mashed Opponents",
-      "leader": "Garaharm",
-	  "realm": "Shadowsong",
-      "faction": "Horde",
-	  "funds": "",
-      "notes": ""
-    },
-    {
-      "created": "2026-06-13",
-      "name": "Random Acts of Rodenticide",
-      "leader": "Zoerunah",
-	  "realm": "Shadowsong",
-      "faction": "Horde",
-	  "funds": "",
-      "notes": ""
-    },
-    {
-      "created": "2026-06-13",
-      "name": "Running With Scissors",
-      "leader": "Sumula",
-	  "realm": "Shadowsong",
-      "faction": "Horde",
-	  "funds": "",
-      "notes": ""
-    }
+    {"created": ""2026-04-01"", "name": ""ChickenHut"", "leader": ""ChickenFingers"", "realm": ""Shadowsong"", "faction": ""Alliance"", "funds": ""1000g"", "notes": ""throw away""},
+    {"created": ""2026-06-13"", "name": ""Deyhide"", "leader": ""Talyka"", "realm": ""Shadowsong"", "faction": ""Horde"", "funds": """", "notes": """"},
+    {"created": ""2026-06-13"", "name": ""Friends of Elphaba"", "leader": ""EarcenCovene"", "realm": ""Shadowsong"", "faction": ""Alliance"", "funds": """", "notes": """"},
+    {"created": ""2026-06-13"", "name": ""Instant Mashed Opponents"", "leader": ""Garaharm"", "realm": ""Shadowsong"", "faction": ""Horde"", "funds": """", "notes": """"},
+    {"created": ""2026-06-13"", "name": ""Random Acts of Rodenticide"", "leader": ""Zoerunah"", "realm": ""Shadowsong"", "faction": ""Horde"", "funds": """", "notes": """"},
+    {"created": ""2026-06-13"", "name": ""Running With Scissors"", "leader": ""Sumula"", "realm": ""Shadowsong"", "faction": ""Horde"", "funds": """", "notes": """"},
+    {"created": """", "name": ""Running with Scissors"", "leader": """", "realm": """", "faction": """", "funds": """", "notes": """"}
   ]
 }
