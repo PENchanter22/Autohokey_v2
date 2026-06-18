@@ -12,10 +12,19 @@ LoadProfileDB() {
         ActivePro := "Default"
         SaveProfileDB()
     } else {
-        raw       := JsonParse(FileRead(F_PROFILE, "UTF-8"))
-        ActivePro := raw["active_profile"]
-        Log("ProfileDB loaded — active profile: " ActivePro)
-        Profiles  := raw["profiles"]
+        try {
+            raw := JsonParse(FileRead(F_PROFILE, "UTF-8"))
+            if !(raw is Map) {
+                ShowMsg("ProfileDB.json failed to parse!`nRestore from backup.", "Fatal Error")
+                return
+            }
+            ActivePro := raw["active_profile"]
+            Profiles  := raw["profiles"]
+            Log("ProfileDB loaded — active profile: " ActivePro)
+        } catch as e {
+            ShowMsg("Failed to load ProfileDB:`n" e.Message, "Fatal Error")
+            return
+        }
     }
     RebuildProfileDD()
     LoadCharDB()
@@ -23,6 +32,10 @@ LoadProfileDB() {
 
 SaveProfileDB() {
     global Profiles, ActivePro, F_PROFILE
+    if (Profiles.Length == 0 || ActivePro == "") {
+        Log("SaveProfileDB — aborted, empty state!", "WARN")
+        return
+    }
     obj := Map("active_profile", ActivePro, "profiles", Profiles)
     FileOpen(F_PROFILE, "w", "UTF-8").Write(JsonStringify(obj))
 }
@@ -132,6 +145,7 @@ AddProfile(*) {
     Log("No duplicate found — adding profile")
     Profiles.Push(Map("name", nm, "created", FormatDate(), "notes", ""))
     SaveProfileDB()
+    SetDirty()   ; ← add
     RefreshPLV()
     RebuildProfileDD()
 }
@@ -187,7 +201,7 @@ AddProfile(*) {
                 p["notes"] := n["Value"] 
                 Profiles[A_Index] := p
                 SaveProfileDB()
-                RefreshPLV()
+                        RefreshPLV()
                 return
             }
         }

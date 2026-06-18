@@ -24,7 +24,6 @@ AttachSearch(editCtrl, dataArr, onSelect, strict := false) {
     editCtrl.OnEvent("Change", SearchEdit_Change)
     editCtrl.OnEvent("LoseFocus", SearchEdit_LoseFocus)
     editCtrl.OnEvent("Focus", SearchEdit_Focus)
-    editCtrl.OnEvent("Key", SearchEdit_Key)
     ; Store per-control metadata via a naming convention on the control
     editCtrl._searchData   := dataArr
     editCtrl._searchCB     := onSelect

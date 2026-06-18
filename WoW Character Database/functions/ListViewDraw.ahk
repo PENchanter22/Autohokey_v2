@@ -16,68 +16,91 @@ RGBtoCOLORREF(rgb) {
 
 InitListViewDraw(lvCtrl) {
     global LV_FS
-    ; Set ListView font size independently of the rest of the GUI
     lvCtrl.SetFont("s" LV_FS, "Segoe UI")
-    ; Hook WM_NOTIFY (0x4E) on the parent GUI window
     OnMessage(0x4E, LV_CustomDraw)
 }
 
 LV_CustomDraw(wParam, lParam, msg, hwnd) {
     global LV, LV_ROW_ODD, LV_ROW_EVEN, LV_ROW_SEL, LV_TEXT, LV_TEXT_SEL
 
-    ; Only handle notifications from our ListView's parent
+    ; Only handle from our ListView's parent window
     if (hwnd != LV.Gui.Hwnd)
         return
 
-    ; Read the NMHDR structure to confirm it's from our LV and is NM_CUSTOMDRAW
+    ; ── NMHDR ────────────────────────────────────────────────
+    ; hwndFrom  : Ptr  (8 bytes on 64-bit)
+    ; idFrom    : UPtr (8 bytes on 64-bit)
+    ; code      : Int  (4 bytes, offset = A_PtrSize * 2)
     nmHwnd := NumGet(lParam, 0, "Ptr")
     if (nmHwnd != LV.Hwnd)
         return
+
+    ; NMHDR size: 2 * A_PtrSize + 4, padded to next Ptr boundary
+    nmhdrSize := (A_PtrSize == 8) ? 24 : 12
 
     code := NumGet(lParam, A_PtrSize * 2, "Int")
     NM_CUSTOMDRAW := -12
     if (code != NM_CUSTOMDRAW)
         return
 
-    CDDS_PREPAINT     := 0x00001
-    CDDS_ITEMPREPAINT := 0x00010
-    CDRF_DODEFAULT    := 0x00000
-    CDRF_NOTIFYITEMDRAW := 0x00020
+    ; ── NMCUSTOMDRAW offsets (after NMHDR) ───────────────────
+    ; dwDrawStage : UInt  +0
+    ; hdc         : Ptr   +4  (padded to ptr boundary on 64-bit → +8)
+    ; rc          : RECT  after hdc ptr
+    ;   left, top, right, bottom : Int each
+    ; dwItemSpec  : UPtr  after rc
+    ; uItemState  : UInt  after dwItemSpec
 
-    dwDrawStage := NumGet(lParam, A_PtrSize * 3,      "UInt")
-    dwItemSpec  := NumGet(lParam, A_PtrSize * 3 + 16, "UPtr")  ; item index (row)
-    uItemState  := NumGet(lParam, A_PtrSize * 3 + 24, "UInt")  ; state flags
-    hdc         := NumGet(lParam, A_PtrSize * 3 + 4,  "Ptr")   ; device context
+    if (A_PtrSize == 8) {
+        ; 64-bit layout
+        off_stage   := nmhdrSize       ; 24
+        off_hdc     := nmhdrSize + 8   ; 32  (4 bytes stage + 4 pad)
+        off_rc      := nmhdrSize + 16  ; 40
+        off_item    := nmhdrSize + 32  ; 56
+        off_state   := nmhdrSize + 40  ; 64
+    } else {
+        ; 32-bit layout
+        off_stage   := nmhdrSize       ; 12
+        off_hdc     := nmhdrSize + 4   ; 16
+        off_rc      := nmhdrSize + 8   ; 20
+        off_item    := nmhdrSize + 24  ; 36
+        off_state   := nmhdrSize + 28  ; 40
+    }
 
-    CDIS_SELECTED := 0x0001
+    dwDrawStage := NumGet(lParam, off_stage, "UInt")
+    hdc         := NumGet(lParam, off_hdc,   "Ptr")
+    rcLeft      := NumGet(lParam, off_rc,      "Int")
+    rcTop       := NumGet(lParam, off_rc +  4, "Int")
+    rcRight     := NumGet(lParam, off_rc +  8, "Int")
+    rcBottom    := NumGet(lParam, off_rc + 12, "Int")
+    dwItemSpec  := NumGet(lParam, off_item,  "UPtr")
+    uItemState  := NumGet(lParam, off_state, "UInt")
+
+    CDDS_PREPAINT       := 0x0001
+    CDDS_ITEMPREPAINT   := 0x0010
+    CDRF_NOTIFYITEMDRAW := 0x0020
+    CDRF_NEWFONT        := 0x0002
+    CDIS_SELECTED       := 0x0001
 
     if (dwDrawStage == CDDS_PREPAINT)
-        return CDRF_NOTIFYITEMDRAW   ; ask for per-item callbacks
+        return CDRF_NOTIFYITEMDRAW
 
     if (dwDrawStage == CDDS_ITEMPREPAINT) {
         isSelected := (uItemState & CDIS_SELECTED) != 0
 
         if isSelected {
-            bg   := RGBtoCOLORREF(LV_ROW_SEL)
-            txt  := RGBtoCOLORREF(LV_TEXT_SEL)
+            bg  := RGBtoCOLORREF(LV_ROW_SEL)
+            txt := RGBtoCOLORREF(LV_TEXT_SEL)
         } else if (Mod(dwItemSpec, 2) == 0) {
-            bg   := RGBtoCOLORREF(LV_ROW_EVEN)
-            txt  := RGBtoCOLORREF(LV_TEXT)
+            bg  := RGBtoCOLORREF(LV_ROW_EVEN)
+            txt := RGBtoCOLORREF(LV_TEXT)
         } else {
-            bg   := RGBtoCOLORREF(LV_ROW_ODD)
-            txt  := RGBtoCOLORREF(LV_TEXT)
+            bg  := RGBtoCOLORREF(LV_ROW_ODD)
+            txt := RGBtoCOLORREF(LV_TEXT)
         }
 
-        ; Set text and background colors via Win32 GDI
-        DllCall("SetTextColor",   "Ptr", hdc, "UInt", txt)
-        DllCall("SetBkColor",     "Ptr", hdc, "UInt", bg)
-
-        ; Fill the row background rect ourselves
-        ; NMCUSTOMDRAW.rc starts at offset A_PtrSize*3 + 8
-        rcLeft   := NumGet(lParam, A_PtrSize * 3 + 8,  "Int")
-        rcTop    := NumGet(lParam, A_PtrSize * 3 + 12, "Int")
-        rcRight  := NumGet(lParam, A_PtrSize * 3 + 16, "Int")  ; note: reused offset on 32-bit; fine on 64
-        rcBottom := NumGet(lParam, A_PtrSize * 3 + 20, "Int")
+        DllCall("SetTextColor", "Ptr", hdc, "UInt", txt)
+        DllCall("SetBkColor",   "Ptr", hdc, "UInt", bg)
 
         hBrush := DllCall("CreateSolidBrush", "UInt", bg, "Ptr")
         rect   := Buffer(16)
@@ -85,10 +108,9 @@ LV_CustomDraw(wParam, lParam, msg, hwnd) {
         NumPut("Int", rcTop,    rect,  4)
         NumPut("Int", rcRight,  rect,  8)
         NumPut("Int", rcBottom, rect, 12)
-        DllCall("FillRect", "Ptr", hdc, "Ptr", rect, "Ptr", hBrush)
-        DllCall("DeleteObject", "Ptr", hBrush)
+        DllCall("FillRect",    "Ptr", hdc, "Ptr", rect, "Ptr", hBrush)
+        DllCall("DeleteObject","Ptr", hBrush)
 
-        CDRF_NEWFONT := 0x00002
-        return CDRF_NEWFONT   ; tell the control to use our new colors
+        return CDRF_NEWFONT
     }
 }

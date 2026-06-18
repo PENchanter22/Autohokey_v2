@@ -31,11 +31,9 @@ SaveGuildDB() {
     global g_guilds, F_GUILD
     try {
         parts := []
-        loop g_guilds.Length {
-            g := g_guilds[A_Index]
-            parts.Push("    " JsonStringifyGuild(g))
-        }
-        output := "{`n  `"guilds`": [`n" JoinArr(parts, ",`n") "`n  ]`n}")
+        loop g_guilds.Length
+            parts.Push("    " JsonStringifyGuild(g_guilds[A_Index]))
+        output := "{`n  `"guilds`": [`n" JoinArr(parts, ",`n") "`n  ]`n}"
         FileOpen(F_GUILD, "w", "UTF-8").Write(output)
         Log("GuildDB saved — " g_guilds.Length " guild(s).")
     } catch as e {
@@ -48,7 +46,7 @@ JsonStringifyGuild(g) {
     parts  := []
     for _, f in fields {
         v := g.Has(f) ? g[f] : ""
-        parts.Push("`"" f "`": `"" EscapeJson(v) "`"")
+        parts.Push("`"" f "`": `"" JsonEscStr(v) "`"")
     }
     return "{" JoinArr(parts, ", ") "}"
 }
@@ -63,7 +61,7 @@ SortGuilds() {
             a := g_guilds[j].Get("name", "")
             b := g_guilds[j+1].Get("name", "")
             if StrCompare(a, b, false) > 0 {
-                tmp          := g_guilds[j]
+                tmp           := g_guilds[j]
                 g_guilds[j]   := g_guilds[j+1]
                 g_guilds[j+1] := tmp
             }
@@ -114,65 +112,55 @@ GetCharNames() {
 
 ManageGuilds() {
     global g_guilds, SD, MyGui
-    global FS_NORM, FS_BOLD, CTL_H, FS_TITLE
+    global FS_NORM, FS_BOLD, CTL_H
 
-    ; Restore main GUI if minimized
     MyGui.Show()
 
     ; Working copy so unsaved changes are discarded on Close
     workGuilds := []
-    loop g_guilds.Length {
-        g := g_guilds[A_Index]
-        workGuilds.Push(g.Clone())
-    }
+    loop g_guilds.Length
+        workGuilds.Push(g_guilds[A_Index].Clone())
 
-    guildNames := []
-    RebuildGuildNames() {
-        guildNames := []
-        loop workGuilds.Length
-            guildNames.Push(workGuilds[A_Index].Get("name", ""))
-    }
-    RebuildGuildNames()
-
-    charNames  := GetCharNames()
-    realmList  := []
+    charNames := GetCharNames()
+    realmList := []
     loop SD["realms"].Length
         realmList.Push(SD["realms"][A_Index]["name"])
-    factions   := SD["factions"]
+    factions := SD["factions"]
 
     D := Gui("+OwnDialogs +AlwaysOnTop", "⚔ Guild Manager")
     D.SetFont("s" FS_NORM, "Segoe UI")
     D.BackColor := "1E1E2E"
     D.SetFont("s" FS_NORM " cCDD6F4", "Segoe UI")
 
-    lw  := 90
-    fw  := 240
-    px  := 14
-    y   := 14
+    lw     := 90
+    fw     := 240
+    px     := 14
+    NOTE_H := CTL_H * 3
+    y      := 14
 
-    ; ── Name (searchable) ─────────────────────────────────────
+    ; ── Name ─────────────────────────────────────────────────
     D.Add("Text", "x" px " y" (y+4) " w" lw " cCDD6F4", "Name:")
     EName := D.Add("Edit", "x" (px+lw) " y" y " w" fw " h" CTL_H " Background2A2A3E cCDD6F4")
     y += CTL_H + 6
 
-    ; ── Guild list LV (filtered by Name field) ────────────────
+    ; ── Guild list LV ─────────────────────────────────────────
     LVG := D.Add("ListView",
         "x" (px+lw) " y" y " w" fw " h" (CTL_H*5) " -Hdr -Multi Background1A1A2E cCDD6F4 NoSortHdr",
         ["Name"])
     LVG.SetFont("s" FS_NORM, "Segoe UI")
     y += CTL_H*5 + 8
 
-    ; ── Leader (searchable) ───────────────────────────────────
+    ; ── Leader ───────────────────────────────────────────────
     D.Add("Text", "x" px " y" (y+4) " w" lw " cCDD6F4", "Leader:")
     ELeader := D.Add("Edit", "x" (px+lw) " y" y " w" fw " h" CTL_H " Background2A2A3E cCDD6F4")
     y += CTL_H + 6
 
-    ; ── Realm (searchable, strict) ────────────────────────────
+    ; ── Realm ────────────────────────────────────────────────
     D.Add("Text", "x" px " y" (y+4) " w" lw " cCDD6F4", "Realm:")
     ERealm := D.Add("Edit", "x" (px+lw) " y" y " w" fw " h" CTL_H " Background2A2A3E cCDD6F4")
     y += CTL_H + 6
 
-    ; ── Faction (DDL) ─────────────────────────────────────────
+    ; ── Faction ──────────────────────────────────────────────
     D.Add("Text", "x" px " y" (y+4) " w" lw " cCDD6F4", "Faction:")
     DDFac := D.Add("DropDownList", "x" (px+lw) " y" y " w" fw " h300 Background2A2A3E cCDD6F4")
     loop factions.Length
@@ -180,12 +168,12 @@ ManageGuilds() {
     DDFac.Value := 1
     y += CTL_H + 6
 
-    ; ── Funds ─────────────────────────────────────────────────
+    ; ── Funds ────────────────────────────────────────────────
     D.Add("Text", "x" px " y" (y+4) " w" lw " cCDD6F4", "Funds:")
     EFunds := D.Add("Edit", "x" (px+lw) " y" y " w" fw " h" CTL_H " Background2A2A3E cCDD6F4")
     y += CTL_H + 6
 
-    ; ── Created (with calendar button) ───────────────────────
+    ; ── Created ──────────────────────────────────────────────
     D.Add("Text", "x" px " y" (y+4) " w" lw " cCDD6F4", "Created:")
     ECreated := D.Add("Edit", "x" (px+lw) " y" y " w" (fw-CTL_H-4) " h" CTL_H " Background2A2A3E cCDD6F4")
     D.SetFont("s" FS_BOLD " Bold cCDD6F4")
@@ -193,21 +181,28 @@ ManageGuilds() {
     D.SetFont("s" FS_NORM " Norm cCDD6F4", "Segoe UI")
     y += CTL_H + 6
 
-    ; ── Notes (255 char cap) ──────────────────────────────────
-    NOTE_H := CTL_H * 3
+    ; ── Notes ────────────────────────────────────────────────
     D.Add("Text", "x" px " y" (y+4) " w" lw " cCDD6F4", "Notes:")
     ENotes := D.Add("Edit",
         "x" (px+lw) " y" y " w" fw " h" NOTE_H " Multi VScroll Background2A2A3E cCDD6F4")
     y += NOTE_H + 10
 
-    ; ── Buttons ───────────────────────────────────────────────
+    ; ── Buttons ──────────────────────────────────────────────
     D.SetFont("s" FS_BOLD " Bold cCDD6F4")
-    BtnAdd  := D.Add("Button", "x" (px+lw)       " y" y " w80 h" CTL_H " Background3D3D5C",        "➕ &Add")
-    BtnDel  := D.Add("Button", "x" (px+lw+88)    " y" y " w80 h" CTL_H " Background3D3D5C cFF6B6B","🗑 &Delete")
-    BtnSave := D.Add("Button", "x" (px+lw+176)   " y" y " w80 h" CTL_H " Background3D3D5C cA6E3A1","💾 &Save")
-    BtnClose:= D.Add("Button", "x" (px+lw+264)   " y" y " w80 h" CTL_H " Background3D3D5C",        "✖ &Close")
+    BtnAdd  := D.Add("Button", "x" (px+lw)      " y" y " w80 h" CTL_H " Background3D3D5C",         "➕ &Add")
+    BtnDel  := D.Add("Button", "x" (px+lw+88)   " y" y " w80 h" CTL_H " Background3D3D5C cFF6B6B", "🗑 &Delete")
+    BtnSave := D.Add("Button", "x" (px+lw+176)  " y" y " w80 h" CTL_H " Background3D3D5C cA6E3A1", "💾 &Save")
+    BtnClose:= D.Add("Button", "x" (px+lw+264)  " y" y " w80 h" CTL_H " Background3D3D5C",         "✖ &Close")
 
-    ; ── Populate LV ───────────────────────────────────────────
+    ; ── Inner helpers ─────────────────────────────────────────
+
+    RebuildGuildNames() {
+        names := []
+        loop workGuilds.Length
+            names.Push(workGuilds[A_Index].Get("name", ""))
+        return names
+    }
+
     RefreshGuildLV(filter := "") {
         LVG.Delete()
         loop workGuilds.Length {
@@ -217,9 +212,7 @@ ManageGuilds() {
         }
         LVG.ModifyCol(1, "AutoHdr")
     }
-    RefreshGuildLV()
 
-    ; ── Populate edit fields from guild record ─────────────────
     PopulateFields(g) {
         EName   .Value := g.Get("name",    "")
         ELeader .Value := g.Get("leader",  "")
@@ -242,16 +235,34 @@ ManageGuilds() {
         DDFac.Value    := 1
     }
 
-    ; ── Name field filters LV, and fills fields if exact match ─
-    EName.OnEvent("Change", (*) => {
+    FlushCurrentToWork() {
+        name := Trim(EName.Value)
+        if (name == "")
+            return
+        g := FindGuildInWork(name, workGuilds)
+        if (g == "")
+            return
+        g["leader"]  := Trim(ELeader.Value)
+        g["realm"]   := Trim(ERealm.Value)
+        g["faction"] := DDFac.Text
+        g["funds"]   := Trim(EFunds.Value)
+        g["created"] := Trim(ECreated.Value)
+        g["notes"]   := Trim(ENotes.Value)
+    }
+
+    ; ── Events ───────────────────────────────────────────────
+
+    EName.OnEvent("Change", OnENameChange)
+    OnENameChange(*) {
         filter := EName.Value
         RefreshGuildLV(filter)
         g := FindGuildInWork(filter, workGuilds)
         if (g != "")
             PopulateFields(g)
-    })
+    }
 
-    LVG.OnEvent("DoubleClick", (*) => {
+    LVG.OnEvent("DoubleClick", OnLVGDblClick)
+    OnLVGDblClick(*) {
         row := LVG.GetNext(0)
         if (row == 0)
             return
@@ -259,29 +270,28 @@ ManageGuilds() {
         g    := FindGuildInWork(name, workGuilds)
         if (g != "")
             PopulateFields(g)
-    })
+    }
 
-    ; ── Calendar popup ────────────────────────────────────────
-    BtnCal.OnEvent("Click", (*) => {
+    BtnCal.OnEvent("Click", OnBtnCalClick)
+    OnBtnCalClick(*) {
         picked := ShowCalendar(D)
         if (picked != "")
             ECreated.Value := picked
-    })
+    }
 
-    ; ── Notes 255 char cap ────────────────────────────────────
-    ENotes.OnEvent("Change", (*) => {
+    ENotes.OnEvent("Change", OnENotesChange)
+    OnENotesChange(*) {
         if (StrLen(ENotes.Value) > 255)
             ENotes.Value := SubStr(ENotes.Value, 1, 255)
-    })
+    }
 
-    ; ── Add ───────────────────────────────────────────────────
-    BtnAdd.OnEvent("Click", (*) => {
+    BtnAdd.OnEvent("Click", OnBtnAddClick)
+    OnBtnAddClick(*) {
         name := Trim(EName.Value)
         if (name == "") {
             ShowMsg("Guild name cannot be empty!", "Add Guild")
             return
         }
-        ; Check for duplicate
         if (FindGuildInWork(name, workGuilds) != "") {
             ShowMsg("A guild named '" name "' already exists!", "Add Guild")
             return
@@ -296,13 +306,12 @@ ManageGuilds() {
             "notes",   Trim(ENotes.Value))
         workGuilds.Push(g)
         SortWorkGuilds(workGuilds)
-        RebuildGuildNames()
         RefreshGuildLV()
         ClearFields()
-    })
+    }
 
-    ; ── Delete ────────────────────────────────────────────────
-    BtnDel.OnEvent("Click", (*) => {
+    BtnDel.OnEvent("Click", OnBtnDelClick)
+    OnBtnDelClick(*) {
         name := Trim(EName.Value)
         if (name == "") {
             ShowMsg("Please enter or select a guild name to delete.", "Delete Guild")
@@ -311,44 +320,41 @@ ManageGuilds() {
         if ShowMsg("Delete guild '" name "'? This cannot be undone.", "Confirm Delete", 262452) != "Yes"
             return
         loop workGuilds.Length {
-            if (workGuilds[A_Index].Get("name","") == name) {
+            if (workGuilds[A_Index].Get("name", "") == name) {
                 workGuilds.RemoveAt(A_Index)
                 break
             }
         }
-        RebuildGuildNames()
         RefreshGuildLV()
         ClearFields()
-    })
+    }
 
-    ; ── Save ──────────────────────────────────────────────────
-    BtnSave.OnEvent("Click", (*) => {
-        ; Flush any edited fields back to workGuilds
-        name := Trim(EName.Value)
-        if (name != "") {
-            g := FindGuildInWork(name, workGuilds)
-            if (g != "") {
-                g["leader"]  := Trim(ELeader.Value)
-                g["realm"]   := Trim(ERealm.Value)
-                g["faction"] := DDFac.Text
-                g["funds"]   := Trim(EFunds.Value)
-                g["created"] := Trim(ECreated.Value)
-                g["notes"]   := Trim(ENotes.Value)
-            }
-        }
+    BtnSave.OnEvent("Click", OnBtnSaveClick)
+    OnBtnSaveClick(*) {
+        FlushCurrentToWork()
         g_guilds := workGuilds
         SaveGuildDB()
         ShowMsg("Guild database saved!", "Save")
-    })
+    }
 
-    ; ── Close ─────────────────────────────────────────────────
-    BtnClose.OnEvent("Click", (*) => D.Destroy())
-    D.OnEvent("Close",        (*) => D.Destroy())
+    BtnClose.OnEvent("Click", OnBtnCloseClick)
+    OnBtnCloseClick(*) {
+        D.Destroy()
+    }
+
+    D.OnEvent("Close", OnDClose)
+    OnDClose(*) {
+        D.Destroy()
+    }
 
     ; ── Attach autocomplete ───────────────────────────────────
+    guildNames := RebuildGuildNames()
     AttachSearch(EName,   guildNames, (*) => {}, false)
     AttachSearch(ELeader, charNames,  (*) => {}, false)
     AttachSearch(ERealm,  realmList,  (*) => {}, true)
+
+    ; ── Initial populate ──────────────────────────────────────
+    RefreshGuildLV()
 
     D.Show("AutoSize")
     RoundCorners(D.Hwnd)
@@ -360,7 +366,7 @@ ManageGuilds() {
 
 FindGuildInWork(name, workGuilds) {
     loop workGuilds.Length {
-        if (workGuilds[A_Index].Get("name","") == name)
+        if (workGuilds[A_Index].Get("name", "") == name)
             return workGuilds[A_Index]
     }
     return ""
@@ -372,8 +378,8 @@ SortWorkGuilds(arr) {
     while i < n {
         j := 1
         while j <= n - i {
-            a := arr[j].Get("name","")
-            b := arr[j+1].Get("name","")
+            a := arr[j].Get("name", "")
+            b := arr[j+1].Get("name", "")
             if StrCompare(a, b, false) > 0 {
                 tmp      := arr[j]
                 arr[j]   := arr[j+1]
@@ -388,22 +394,35 @@ SortWorkGuilds(arr) {
 ; ── Calendar popup ────────────────────────────────────────────
 
 ShowCalendar(ownerGui) {
-    global FS_NORM, CTL_H
+    global FS_NORM, FS_BOLD, CTL_H
     result := ""
+
     C := Gui("+OwnDialogs +AlwaysOnTop", "Pick a Date")
     C.SetFont("s" FS_NORM, "Segoe UI")
     C.BackColor := "1E1E2E"
-    Cal := C.Add("MonthCal", "x10 y10 Background1A1A2E")
-    C.SetFont("s" FS_NORM " Bold cCDD6F4")
-    BtnOK  := C.Add("Button", "x10 y+8 w100 h" CTL_H " Default Background3D3D5C", "&OK")
-    BtnCan := C.Add("Button", "x118 yp w100 h" CTL_H " Background3D3D5C cFF6B6B", "&Cancel")
-    BtnOK.OnEvent("Click", (*) => {
-        raw    := Cal.Value          ; YYYYMMDDHHmmss
+    Cal := C.Add("MonthCal", "x10 y10")
+
+    C.SetFont("s" FS_BOLD " Bold cCDD6F4")
+    BtnOK  := C.Add("Button", "x10  y+8 w100 h" CTL_H " Default Background3D3D5C", "&OK")
+    BtnCan := C.Add("Button", "x118 yp  w100 h" CTL_H " Background3D3D5C cFF6B6B", "&Cancel")
+
+    BtnOK.OnEvent("Click", OnCalOK)
+    OnCalOK(*) {
+        raw    := Cal.Value
         result := SubStr(raw,1,4) "-" SubStr(raw,5,2) "-" SubStr(raw,7,2)
         C.Destroy()
-    })
-    BtnCan.OnEvent("Click", (*) => C.Destroy())
-    C.OnEvent("Close",      (*) => C.Destroy())
+    }
+
+    BtnCan.OnEvent("Click", OnCalCan)
+    OnCalCan(*) {
+        C.Destroy()
+    }
+
+    C.OnEvent("Close", OnCalClose)
+    OnCalClose(*) {
+        C.Destroy()
+    }
+
     C.Show("AutoSize")
     RoundCorners(C.Hwnd)
     WinWaitClose(C)

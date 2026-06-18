@@ -1,4 +1,4 @@
-; ============================================================
+﻿; ============================================================
 ;  CharacterDB.ahk — Character CRUD, list, sort, entry dialog
 ;  Include this file from the master script.
 ; ============================================================
@@ -118,7 +118,7 @@ RebuildCharIndex() {
         parts := []
         loop existing.Length {
             e := existing[A_Index]
-            parts.Push("    {`"character`": `"" EscapeJson(e.Get("character","")) "`", `"profile`": `"" EscapeJson(e.Get("profile","")) "`"}")
+            parts.Push("    {`"character`": `"" JsonEscStr(e.Get("character","")) "`", `"profile`": `"" JsonEscStr(e.Get("profile","")) "`"}")
         }
         output := "{`n  `"roster`": [`n" JoinArr(parts, ",`n") "`n  ]`n}"
         FileOpen(F_CIDX, "w", "UTF-8").Write(output)
@@ -336,7 +336,7 @@ IsValidGuildName(name) {
     ; 2-24 chars, letters and spaces only (accented OK, mixed caps OK), no numbers/symbols
     if (StrLen(name) < 2 || StrLen(name) > 24)
         return false
-    if RegExMatch(name, "[0-9!@#$%^&*()_+=\[\]{};':""\\|,.<>/?`~]")
+	if RegExMatch(name, "[0-9!@#$%^&*()+={};':\\|,.<>/?~]")
         return false
     return true
 }
